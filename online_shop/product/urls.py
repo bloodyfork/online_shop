@@ -1,5 +1,6 @@
-from django.urls import path, include
+from django.urls import path
+from product.views import store
 
 urlpatterns = [
-    path('', include("core.urls")),
+    path('', store, name="store"),
 ]
