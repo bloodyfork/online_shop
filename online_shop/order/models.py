@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import BaseModel
 from customer.models import Customer
+from product.models import Product
 # Create your models here.
 
 
@@ -10,5 +11,7 @@ class Cart(BaseModel):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     # off_code = models.OneToOneField(OffCode, on_delete=models.CASCADE, null=True, blank=True)
 
+
 class OrderItem(BaseModel):
-    pass
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
