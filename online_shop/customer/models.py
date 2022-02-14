@@ -14,5 +14,5 @@ class Address(BaseModel):
     province = models.CharField(max_length=18, help_text="Enter your address")
     city = models.CharField(max_length=18, help_text="Enter your address")
     exact_address = models.CharField(max_length=100, help_text="Enter your exact address")
-    postal_code = models.PositiveIntegerField(max_length=30, blank=True, null=True)
+    postal_code = models.PositiveIntegerField(blank=True, null=True)
     customer = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
