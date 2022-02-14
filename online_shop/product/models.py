@@ -25,7 +25,7 @@ class Category(BaseModel):
 
 
 class Discount(BaseModel):
-    type = models.CharField(choices=[("presentage", "presentage"), ("currency", "currency")], max_length=10,
+    type = models.CharField(choices=[("percentage", "percentage"), ("currency", "currency")], max_length=10,
                             help_text="choose type of discount")
     value = models.PositiveIntegerField()
     max_discount = models.PositiveIntegerField(blank=True, null=True, help_text="Enter max amount of discount")

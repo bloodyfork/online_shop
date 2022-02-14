@@ -15,3 +15,7 @@ class Cart(BaseModel):
 class OrderItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
+
+
+# class OffCode(BaseModel):
+#     pass
