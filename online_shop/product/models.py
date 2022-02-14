@@ -13,7 +13,7 @@ class Product(BaseModel):
     description = models.CharField(max_length=100, )
     in_stock = models.BooleanField(default=True)
     number_in_inventory = models.PositiveSmallIntegerField()
-    discount = ...  #################################################################### ToDo FK --> Discount
+    discount = models.OneToOneField(to='Discount', on_delete=models.CASCADE)
 
 
 class Category(BaseModel):
@@ -22,6 +22,7 @@ class Category(BaseModel):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Discount(BaseModel):
     type = models.CharField(choices=[("presentage", "presentage"), ("currency", "currency")], max_length=10,
