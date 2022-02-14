@@ -6,7 +6,7 @@ from core.models import BaseModel
 
 class Product(BaseModel):
     name = models.CharField(max_length=25, unique=True, help_text="Enter name of the product ")
-    category = ...  ###################################################################### ToDo FK --> Category
+    category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
     brand = models.CharField(max_length=18, help_text="Enter brand of product")
     image = models.ImageField(upload_to=..., help_text="Upload photo of product here")  # ToDo make upload work,SetMedia
     price = models.PositiveIntegerField(help_text="Enter price of product")
