@@ -41,7 +41,7 @@ class Cart(BaseModel):
                 return self.final_price
 
     def check_is_paid(self):
-        if self.is_paid == True:
+        if self.is_paid is True:
             self.is_deleted = True
         else:
             pass
@@ -70,6 +70,3 @@ class OffCode(BaseModel):
             self.is_deleted = True
         else:
             pass
-
-# class status:
-#     title = models.CharField(choices=)
