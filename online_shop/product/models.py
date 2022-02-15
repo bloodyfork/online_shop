@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from core.models import BaseModel
 
@@ -12,7 +13,7 @@ class Product(BaseModel):
     image = models.ImageField(upload_to='media/product', help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
-    number_in_inventory = models.PositiveSmallIntegerField(default=1)
+    number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1)])
     discount = models.OneToOneField(to='Discount', on_delete=models.CASCADE, blank=True, null=True)
 
     def check_in_stock(self):
