@@ -37,3 +37,5 @@ class Discount(BaseModel):
 class Comment(BaseModel):
     context = models.CharField(max_length=120)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+
+...
