@@ -7,7 +7,6 @@ from core.models import BaseModel
 class Customer(BaseModel):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=14, help_text="Enter your phone number")
-    address = ...
 
 
 class Address(BaseModel):

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -24,3 +25,9 @@ class BaseModel(models.Model):
 
     def logical_delete(self):
         self.is_deleted = True
+
+
+class User(AbstractUser):
+
+    def __str__(self):
+        return f"{self.username} \n {self.password}"
