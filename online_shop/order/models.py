@@ -13,10 +13,9 @@ class Cart(BaseModel):
     final_price = models.PositiveIntegerField(help_text="Final Price", default=0)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     off_code = models.OneToOneField("OffCode", on_delete=models.CASCADE, null=True, blank=True)
+    is_paid = models.BooleanField(default=False)
 
-    # status = models.ForeignKey(to=Status, on_delete=models.PROTECT)
-
-    def calculate_total_price(self):
+    def calculate_total_price(self):   ############# FRONT FUNCTION #############
         all_order_items = self.orderitem_set.all()
         for order in all_order_items:
             each_price = order.product.price
@@ -24,7 +23,7 @@ class Cart(BaseModel):
             self.total_price += price_for_all
         return self.total_price
 
-    def calculate_final_price(self):
+    def calculate_final_price(self):  ############# FRONT FUNCTION #############
         all_order_items = self.orderitem_set.all()
         if self.off_code is not None:
             for order in all_order_items:
@@ -40,6 +39,12 @@ class Cart(BaseModel):
                 discounted_prices = order.sum_of_prices_after_discount()
                 self.final_price += discounted_prices
                 return self.final_price
+
+    def check_is_paid(self):
+        if self.is_paid == True:
+            self.is_deleted = True
+        else:
+            pass
 
 
 class OrderItem(BaseModel):
