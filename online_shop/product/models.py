@@ -13,7 +13,7 @@ class Product(BaseModel):
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
     number_in_inventory = models.PositiveSmallIntegerField(default=1)
-    discount = models.OneToOneField(to='Discount', on_delete=models.CASCADE)
+    discount = models.OneToOneField(to='Discount', on_delete=models.CASCADE, blank=True, null=True)
 
     def check_in_stock(self):
         if self.number_in_inventory == 0:
@@ -51,7 +51,7 @@ class Category(BaseModel):
         verbose_name_plural = "Categories"
 
     name = models.CharField(max_length=20, unique=True, help_text="Enter name of category")
-    base_category = models.ForeignKey('self', on_delete=models.CASCADE)
+    base_category = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"

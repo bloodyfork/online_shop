@@ -16,7 +16,11 @@ class Cart(BaseModel):
     # status = models.ForeignKey(to=Status, on_delete=models.PROTECT)
 
     def calculate_total_price(self):
-        all_order_items = self.orderitem_set.objects.all()
+        all_order_items = self.orderitem_set.all()
+        for order in all_order_items:
+            each_price = order.product.price
+            price_for_all = each_price*order.how_many
+            self.total_price += price_for_all
 
 
 class OrderItem(BaseModel):
