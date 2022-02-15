@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from core.models import BaseModel
 from customer.models import Customer
@@ -24,11 +25,21 @@ class Cart(BaseModel):
         return self.total_price
 
     def calculate_final_price(self):
+        all_order_items = self.orderitem_set.all()
         if self.off_code is not None:
-            pass
+            for order in all_order_items:
+                 discounted_prices = order.sum_of_prices_after_discount()
+                 self.final_price += discounted_prices
+
+            self.final_price = self.final_price*
 
         else:
-            self.final_price = ...
+            for order in all_order_items:
+                discounted_prices = order.sum_of_prices_after_discount()
+                self.final_price += discounted_prices
+
+
+
 
 
 class OrderItem(BaseModel):
@@ -43,7 +54,7 @@ class OrderItem(BaseModel):
 
 class OffCode(BaseModel):
     the_code = models.CharField(max_length=10, help_text="Enter code for offer", unique=True)
-    value = models.PositiveIntegerField(help_text="Enter code percentage for offer")
+    value = models.PositiveIntegerField(help_text="Enter code percentage for offer",validators=[MinValueValidator(1), MaxValueValidator(100)])
     is_active = models.BooleanField(default=True)
     how_many_use = models.PositiveSmallIntegerField(default=3, help_text="how many times do you want this code")
 
