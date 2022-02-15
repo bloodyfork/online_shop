@@ -30,10 +30,15 @@ class Product(BaseModel):
                 if cal_discount_amount > self.discount.max_discount:
                     raise "the discount is more than maximum amount for discount"
                 else:
-                    self.price = self.price - cal_discount_amount
+                    res = self.price - cal_discount_amount
+                    return res
 
             elif self.discount.type == "currency":
-                self.price -= self.discount.value
+                if self.discount.max_discount >= self.price:
+                    raise "the discount is higher than price"
+                else:
+                    res = self.price - self.discount.value
+                    return res
 
             else:
                 raise "Error while precessing logic"

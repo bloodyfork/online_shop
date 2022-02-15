@@ -18,14 +18,7 @@ class OrderItem(BaseModel):
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
     how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
 
-    def calculate_final_price(self):
-        if self.product.discount is None and \
-           self.cart.off_code is None:
-            self.cart.total_price += self.how_many * self.product.price
-            self.cart.final_price += self.cart.total_price
 
-        elif self.product.discount is None and \
-                self.cart.off_code is not None:
 
 
 class OffCode(BaseModel):
