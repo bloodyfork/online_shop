@@ -36,8 +36,9 @@ class OrderItem(BaseModel):
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
     how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
 
-
-# ToDo count price using calculate_price_discount()
+    def sum_of_prices_after_discount(self):
+        res = self.product.after_discount_price()*self.how_many
+        return res
 
 
 class OffCode(BaseModel):

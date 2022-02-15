@@ -21,23 +21,23 @@ class Product(BaseModel):
         else:
             pass
 
-    def calculate_discount_amount(self):
+    def after_discount_price(self):
         if self.discount is None:
-            return 0
+            return self.price
         elif self.discount is not None:
             if self.discount.type == "percentage":
                 discount_amount = (self.price * self.discount.value) // self.price
                 if discount_amount > self.discount.max_discount:
                     raise "the discount is more than maximum amount for discount"
                 else:
-                    res = discount_amount
+                    res = self.price - discount_amount
                     return res
 
             elif self.discount.type == "currency":
                 if self.discount.max_discount >= self.price:
                     raise "the discount is higher than price"
                 else:
-                    res = self.discount.value
+                    res = self.price - self.discount.value
                     return res
 
             else:
