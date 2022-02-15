@@ -97,5 +97,24 @@ h1,h2,h3,h4,h5,h6{
 .hidden{
 	display: none!important;
 }
+/* footer */
+.icons{
+	text-align: center;
+	background-color: #005057 !important;
+}
 
-.centering{text-align: center}
+.footer-icon{
+	color: #ececec;
+}
+
+.footer-copyright{
+	background-color: #01464d !important;
+
+}
+
+
+#creator{
+	color: #ececec;
+}
+
+/* end footer*/
