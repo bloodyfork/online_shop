@@ -31,12 +31,15 @@ class Cart(BaseModel):
                  discounted_prices = order.sum_of_prices_after_discount()
                  self.final_price += discounted_prices
 
-            self.final_price = self.final_price*
+            self.final_price = self.final_price*(100-self.off_code.value)//100
+
+            return self.final_price
 
         else:
             for order in all_order_items:
                 discounted_prices = order.sum_of_prices_after_discount()
                 self.final_price += discounted_prices
+                return self.final_price
 
 
 
