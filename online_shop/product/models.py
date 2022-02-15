@@ -47,6 +47,9 @@ class Product(BaseModel):
 
 
 class Category(BaseModel):
+    class Meta:
+        verbose_name_plural = "Categories"
+
     name = models.CharField(max_length=20, unique=True, help_text="Enter name of category")
     base_category = models.ForeignKey('self', on_delete=models.CASCADE)
 
