@@ -27,7 +27,7 @@ class BaseModel(models.Model):
         self.is_deleted = True
 
 
-class User(AbstractUser):
-
-    def __str__(self):
-        return f"{self.username} \n {self.password}"
+# class User(AbstractUser):
+#
+#     def __str__(self):
+#         return f"{self.username} \n {self.password}"
