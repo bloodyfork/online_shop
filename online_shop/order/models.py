@@ -21,6 +21,14 @@ class Cart(BaseModel):
             each_price = order.product.price
             price_for_all = each_price*order.how_many
             self.total_price += price_for_all
+        return self.total_price
+
+    def calculate_final_price(self):
+        if self.off_code is not None:
+            pass
+
+        else:
+            self.final_price = ...
 
 
 class OrderItem(BaseModel):
