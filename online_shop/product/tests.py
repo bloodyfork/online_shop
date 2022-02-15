@@ -1,5 +1,7 @@
 from django.test import TestCase
 from .models import *
+
+
 # Create your tests here.
 
 class DiscountTestCase(TestCase):
@@ -23,7 +25,6 @@ class CategoryTestCase(TestCase):
                                 base_category=Category.objects.get(name="Electronic Devices")
                                 )
 
-
         Category.objects.create(name="clothes")
         Category.objects.create(name="shoes",
                                 base_category=Category.objects.get(name="clothes")
@@ -31,6 +32,7 @@ class CategoryTestCase(TestCase):
         Category.objects.create(name="jackets",
                                 base_category=Category.objects.get(name="clothes")
                                 )
+
 
 class ProductTestCase(TestCase):
     def setUp(self):
@@ -40,7 +42,7 @@ class ProductTestCase(TestCase):
                                description="it's a good phone",
                                price=10000000,
                                number_in_inventory=5,
-                               discount= None
+                               discount=None
                                )
 
         Product.objects.create(name='gu603',
@@ -50,7 +52,7 @@ class ProductTestCase(TestCase):
                                in_stock=True,
                                price=30000000,
                                number_in_inventory=2,
-                               discount= Discount.objects.get()
+                               discount=Discount.objects.get(id=1)
                                )
 
         Product.objects.create(name="ipad",
@@ -60,7 +62,7 @@ class ProductTestCase(TestCase):
                                in_stock=True,
                                price=20000000,
                                number_in_inventory=1,
-                               discount=
+                               discount=Discount.objects.get(id=2)
                                )
 
         Product.objects.create(name='jean jacket',
@@ -70,7 +72,7 @@ class ProductTestCase(TestCase):
                                in_stock=False,
                                price=700000,
                                number_in_inventory=0,
-                               discount= None
+                               discount=None
                                )
 
 
