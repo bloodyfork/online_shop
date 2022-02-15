@@ -9,8 +9,8 @@ class Cart(BaseModel):
     total_price = models.PositiveIntegerField(help_text="Total Price", default=0)
     final_price = models.PositiveIntegerField(help_text="Final Price", default=0)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    off_code = models.OneToOneField("OffCode", on_delete=models.CASCADE, null=True, blank=True)
     # status = models.ForeignKey(to=Status, on_delete=models.PROTECT)
-    # off_code = models.OneToOneField(OffCode, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class OrderItem(BaseModel):
@@ -21,5 +21,8 @@ class OrderItem(BaseModel):
 # class status:
 #     title = models.CharField(choices=)
 
-# class OffCode(BaseModel):
-#     pass
+class OffCode(BaseModel):
+    the_code = models.CharField(max_length=10, help_text="Enter code for offer")
+    value = models.PositiveIntegerField(help_text="Enter code percentage for offer")
+    is_active = models.BooleanField(default=True)
+    how_many_use = models.PositiveSmallIntegerField(default=3, help_text="how many times do you want this code")

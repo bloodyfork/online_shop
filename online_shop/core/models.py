@@ -30,4 +30,4 @@ class BaseModel(models.Model):
 # class User(AbstractUser):
 #
 #     def __str__(self):
-#         return f"{self.username} \n {self.password}"
+#         return self.get_username()
