@@ -12,8 +12,15 @@ class Product(BaseModel):
     image = models.ImageField(upload_to=..., help_text="Upload photo of product here")  # ToDo make upload work,SetMedia
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
-    number_in_inventory = models.PositiveSmallIntegerField()
+    number_in_inventory = models.PositiveSmallIntegerField(default=1)
     discount = models.OneToOneField(to='Discount', on_delete=models.CASCADE)
+
+    def check_in_stock(self):
+        if self.number_in_inventory == 0:
+            self.in_stock = False
+        else:
+            pass
+
 
 
 class Category(BaseModel):
@@ -37,5 +44,3 @@ class Discount(BaseModel):
 class Comment(BaseModel):
     context = models.CharField(max_length=120)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
-
-...
