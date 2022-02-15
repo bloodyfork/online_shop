@@ -21,7 +21,7 @@ class Product(BaseModel):
         else:
             pass
 
-    def calculate_price(self):
+    def calculate_price_discount(self):
         if self.discount is None:
             pass
         elif self.discount is not None:
@@ -58,7 +58,7 @@ class Discount(BaseModel):
     type = models.CharField(choices=[("percentage", "percentage"), ("currency", "currency")], max_length=10,
                             help_text="choose type of discount")
     value = models.PositiveIntegerField()
-    max_discount = models.PositiveIntegerField(blank=True, null=True, help_text="Enter max amount of discount")
+    max_discount = models.PositiveIntegerField(help_text="Enter max amount of discount")
 
     def __str__(self):
         return f"{self.value} {self.type}"

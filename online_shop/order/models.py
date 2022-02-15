@@ -2,6 +2,8 @@ from django.db import models
 from core.models import BaseModel
 from customer.models import Customer
 from product.models import Product
+
+
 # Create your models here.
 
 
@@ -10,7 +12,11 @@ class Cart(BaseModel):
     final_price = models.PositiveIntegerField(help_text="Final Price", default=0)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     off_code = models.OneToOneField("OffCode", on_delete=models.CASCADE, null=True, blank=True)
+
     # status = models.ForeignKey(to=Status, on_delete=models.PROTECT)
+
+    def calculate_total_price(self):
+        all_order_items = self.orderitem_set.objects.all()
 
 
 class OrderItem(BaseModel):
@@ -19,14 +25,14 @@ class OrderItem(BaseModel):
     how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
 
 
+# ToDo count price using calculate_price_discount()
 
 
 class OffCode(BaseModel):
-    the_code = models.CharField(max_length=10, help_text="Enter code for offer")
+    the_code = models.CharField(max_length=10, help_text="Enter code for offer", unique=True)
     value = models.PositiveIntegerField(help_text="Enter code percentage for offer")
     is_active = models.BooleanField(default=True)
     how_many_use = models.PositiveSmallIntegerField(default=3, help_text="how many times do you want this code")
-
 
 # class status:
 #     title = models.CharField(choices=)
