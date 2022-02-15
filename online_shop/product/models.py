@@ -21,6 +21,25 @@ class Product(BaseModel):
         else:
             pass
 
+    def calculate_price(self):
+        if self.discount is None:
+            pass
+        elif self.discount is not None:
+            if self.discount.type == "percentage":
+                cal_discount_amount = (self.price * self.discount.value) // self.price
+                if cal_discount_amount > self.discount.max_discount:
+                    raise "the discount is more than maximum amount for discount"
+                else:
+                    self.price = self.price - cal_discount_amount
+
+            elif self.discount.type == "currency":
+                self.price -= self.discount.value
+
+            else:
+                raise "Error while precessing logic"
+        else:
+            raise "Error while precessing logic"
+
 
 class Category(BaseModel):
     name = models.CharField(max_length=20, unique=True, help_text="Enter name of category")

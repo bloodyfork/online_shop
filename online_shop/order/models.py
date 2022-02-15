@@ -18,12 +18,22 @@ class OrderItem(BaseModel):
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
     how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
 
+    def calculate_final_price(self):
+        if self.product.discount is None and \
+           self.cart.off_code is None:
+            self.cart.total_price += self.how_many * self.product.price
+            self.cart.final_price += self.cart.total_price
 
-# class status:
-#     title = models.CharField(choices=)
+        elif self.product.discount is None and \
+                self.cart.off_code is not None:
+
 
 class OffCode(BaseModel):
     the_code = models.CharField(max_length=10, help_text="Enter code for offer")
     value = models.PositiveIntegerField(help_text="Enter code percentage for offer")
     is_active = models.BooleanField(default=True)
     how_many_use = models.PositiveSmallIntegerField(default=3, help_text="how many times do you want this code")
+
+
+# class status:
+#     title = models.CharField(choices=)
