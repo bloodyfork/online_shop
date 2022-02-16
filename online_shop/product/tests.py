@@ -33,6 +33,8 @@ class CategoryTestCase(TestCase):
                                 base_category=Category.objects.get(name="clothes")
                                 )
 
+    def test_str(self):
+        self.assertEqual(print(Category.objects.get(id=1)), "Electronic Devices")
 
 class ProductTestCase(TestCase):
     def setUp(self):
