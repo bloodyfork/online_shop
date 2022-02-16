@@ -78,5 +78,8 @@ class ProductTestCase(TestCase):
     def test_check_in_stock(self):
         pass
 
+    def test_after_discount_price(self):
+        pass
+
 
 
