@@ -75,5 +75,8 @@ class ProductTestCase(TestCase):
                                discount=None
                                )
 
+    def test_check_in_stock(self):
+        pass
+
 
 

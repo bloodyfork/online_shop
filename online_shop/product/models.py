@@ -10,7 +10,8 @@ class Product(BaseModel):
     brand = models.CharField(max_length=18, help_text="Enter brand of product")
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
     description = models.CharField(max_length=100, )
-    image = models.ImageField(blank=True, null=True, upload_to='media/product', help_text="Upload photo of product here")
+    image = models.ImageField(blank=True, null=True, upload_to='media/product',
+                              help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
     number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1)])
