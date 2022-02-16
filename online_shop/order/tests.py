@@ -5,7 +5,6 @@ from customer.tests import CustomerTestCase
 
 
 # Create your tests here.
-class OrderItemTestCase(TestCase):
 
 class CartTestCase(TestCase):
     def setUp(self):
@@ -16,3 +15,16 @@ class CartTestCase(TestCase):
 
     def test_final_price(self):
         pass
+
+    def test_check_is_paid(self):
+        self.assertEqual(Cart.objects.get(id=1).check_is_paid(), False)
+
+
+class OrderItemTestCase(TestCase):
+    def setUp(self):
+        OrderItem.objects.create(product=Product.objects.get(id=1),
+                                 cart=Cart.objects.get(id=1),
+                                 how_many=1
+                                 )
+
+

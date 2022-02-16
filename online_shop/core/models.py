@@ -28,6 +28,5 @@ class BaseModel(models.Model):
 
 
 # class User(AbstractUser):
-#
 #     def __str__(self):
 #         return self.get_username()

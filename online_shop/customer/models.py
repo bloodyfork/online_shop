@@ -8,6 +8,9 @@ class Customer(BaseModel):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=14, help_text="Enter your phone number")
 
+    def __str__(self):
+        return self.user.username
+
 
 class Address(BaseModel):
     class Meta:

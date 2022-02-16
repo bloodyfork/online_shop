@@ -35,7 +35,7 @@ class Product(BaseModel):
                     return res
 
             elif self.discount.type == "currency":
-                if self.discount.max_discount >= self.price:
+                if self.discount.value >= self.price:
                     raise "the discount is higher than price"
                 else:
                     res = self.price - self.discount.value
