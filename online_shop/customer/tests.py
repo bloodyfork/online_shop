@@ -13,7 +13,7 @@ class CustomerTestCase(TestCase):
     def setUp(self):
         Customer.objects.create(user=User.objects.get(
             username="akbar"),
-            customer__phone="09338616475")
+            phone="09338616475")
 
     def test_str(self):
         self.assertEqual(print(Customer.objects.get(id=1)), "akbar")

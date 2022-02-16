@@ -6,83 +6,100 @@ from .models import *
 
 class DiscountTestCase(TestCase):
     def setUp(self):
-        Discount.objects.create(type="currency", value=10000)
-        Discount.objects.create(type="percentage", value=20, max_discount=100000)
+        self.dis1 = Discount.objects.create(type="currency", value=10000)
+        self.dis2 = Discount.objects.create(type="percentage", value=20, max_discount=100000)
 
     def test_str(self):
-        self.assertEqual(Discount.objects.get(id=1), 10000)
+        self.assertEqual(str(self.dis1), '10000')
 
 
 class CategoryTestCase(TestCase):
     def setUp(self):
-        Category.objects.create(name="Electronic Devices")
-        Category.objects.create(name="phone",
-                                base_category=Category.objects.get(name="Electronic Devices")
-                                )
+        self.cat1 = Category.objects.create(name="Electronic Devices")
 
-        Category.objects.create(name="laptop",
-                                base_category=Category.objects.get(name="Electronic Devices")
-                                )
+        self.cat2 = Category.objects.create(name="phone",
+                                            base_category=self.cat1,
+                                            )
+        self.cat3 = Category.objects.create(name="laptop",
+                                            base_category=self.cat1
+                                            )
+        self.cat4 = Category.objects.create(name="tablet",
+                                            base_category=self.cat1,
+                                            )
 
-        Category.objects.create(name="tablet",
-                                base_category=Category.objects.get(name="Electronic Devices")
-                                )
+        self.cat5 = Category.objects.create(name="clothes")
 
-        Category.objects.create(name="clothes")
-        Category.objects.create(name="shoes",
-                                base_category=Category.objects.get(name="clothes")
-                                )
-        Category.objects.create(name="jackets",
-                                base_category=Category.objects.get(name="clothes")
-                                )
+        self.cat6 = Category.objects.create(name="shoes",
+                                            base_category=self.cat4
+                                            )
+        self.cat7 = Category.objects.create(name="jackets",
+                                            base_category=self.cat4
+                                            )
 
     def test_str(self):
-        self.assertEqual(print(Category.objects.get(id=1)), "Electronic Devices")
+        self.assertEqual(str(self.cat1), "Electronic Devices")
+        self.assertEqual(str(self.cat2), "phone")
 
 
 class ProductTestCase(TestCase):
     def setUp(self):
-        Product.objects.create(name='s7',
-                               brand='samsung',
-                               category=Category.objects.get(name="phone"),
-                               description="it's a good phone",
-                               price=10000000,
-                               number_in_inventory=5,
-                               discount=None
-                               )
+        self.cat1 = Category.objects.create(name="Electronic Devices")
 
-        Product.objects.create(name='gu603',
-                               brand='asus',
-                               category=Category.objects.get(name="laptop"),
-                               description="a good laptop",
-                               in_stock=True,
-                               price=30000000,
-                               number_in_inventory=2,
-                               discount=Discount.objects.get(id=1)
-                               )
+        self.cat2 = Category.objects.create(name="phone",
+                                            base_category=self.cat1,
+                                            )
+        self.cat3 = Category.objects.create(name="laptop",
+                                            base_category=self.cat1
+                                            )
+        self.cat4 = Category.objects.create(name="tablet",
+                                            base_category=self.cat1,
+                                            )
 
-        Product.objects.create(name="ipad",
-                               brand="apple",
-                               category=Category.objects.get(name="tablet"),
-                               description="Expensive tablet",
-                               in_stock=True,
-                               price=20000000,
-                               number_in_inventory=1,
-                               discount=Discount.objects.get(id=2)
-                               )
+        self.cat5 = Category.objects.create(name="clothes")
 
-        Product.objects.create(name='jean jacket',
-                               brand="h&m",
-                               category=Category.objects.get(name="jacket"),
-                               description="warm jacket",
-                               in_stock=False,
-                               price=700000,
-                               number_in_inventory=0,
-                               discount=None
-                               )
+        self.cat6 = Category.objects.create(name="jacket",
+                                            base_category=self.cat4
+                                            )
+
+        self.product1 = Product.objects.create(name='s7',
+                                               brand='samsung',
+                                               category=self.cat2,
+                                               description="it's a good phone",
+                                               price=10000000,
+                                               number_in_inventory=5,
+                                               )
+
+        self.product2 = Product.objects.create(name='gu603',
+                                               brand='asus',
+                                               category=self.cat3,
+                                               description="a good laptop",
+                                               in_stock=True,
+                                               price=30000000,
+                                               number_in_inventory=2,
+                                               discount=Discount.objects.get(id=1)
+                                               )
+
+        self.product3 = Product.objects.create(name="ipad",
+                                               brand="apple",
+                                               category=self.cat4,
+                                               description="Expensive tablet",
+                                               in_stock=True,
+                                               price=20000000,
+                                               number_in_inventory=1,
+                                               discount=Discount.objects.get(id=2)
+                                               )
+
+        self.product4 = Product.objects.create(name='jean jacket',
+                                               brand="h&m",
+                                               category=self.cat6,
+                                               description="warm jacket",
+                                               in_stock=False,
+                                               price=700000,
+                                               number_in_inventory=0,
+                                               )
 
     def test_check_in_stock(self):
-        pass
+        self.assertEqual(self.product1.check_in_stock(), True)
 
     def test_after_discount_price(self):
         pass
