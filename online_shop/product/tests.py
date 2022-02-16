@@ -71,7 +71,7 @@ class ProductTestCase(TestCase):
                                                description="it's a good phone",
                                                price=10000000,
                                                number_in_inventory=5,
-                                               discount= None
+                                               discount=None
                                                )
 
         self.product2 = Product.objects.create(name='gu603',
@@ -91,6 +91,7 @@ class ProductTestCase(TestCase):
                                                in_stock=True,
                                                price=20000000,
                                                number_in_inventory=1,
+                                               discount=self.dis1
 
                                                )
 
@@ -101,13 +102,14 @@ class ProductTestCase(TestCase):
                                                in_stock=False,
                                                price=700000,
                                                number_in_inventory=0,
+                                               discount=self.dis1
                                                )
 
     def test_check_in_stock(self):
         self.assertEqual(self.product1.check_in_stock(), True)
 
     def test_after_discount_price(self):
-        pass
+        self.assertEqual(self.product3.after_discount_price(), 20000000 - 10000)
 
 
 class CommentTestCase(TestCase):
