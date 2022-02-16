@@ -43,6 +43,10 @@ class CategoryTestCase(TestCase):
 
 class ProductTestCase(TestCase):
     def setUp(self):
+
+        self.dis1 = Discount.objects.create(type="currency", value=10000)
+        self.dis2 = Discount.objects.create(type="percentage", value=20, max_discount=100000)
+
         self.cat1 = Category.objects.create(name="Electronic Devices")
 
         self.cat2 = Category.objects.create(name="phone",
@@ -67,6 +71,7 @@ class ProductTestCase(TestCase):
                                                description="it's a good phone",
                                                price=10000000,
                                                number_in_inventory=5,
+                                               discount= None
                                                )
 
         self.product2 = Product.objects.create(name='gu603',
@@ -76,7 +81,7 @@ class ProductTestCase(TestCase):
                                                in_stock=True,
                                                price=30000000,
                                                number_in_inventory=2,
-                                               discount=Discount.objects.get(id=1)
+
                                                )
 
         self.product3 = Product.objects.create(name="ipad",
@@ -86,7 +91,7 @@ class ProductTestCase(TestCase):
                                                in_stock=True,
                                                price=20000000,
                                                number_in_inventory=1,
-                                               discount=Discount.objects.get(id=2)
+
                                                )
 
         self.product4 = Product.objects.create(name='jean jacket',

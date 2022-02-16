@@ -24,7 +24,6 @@ class Product(BaseModel):
         else:
             return self.in_stock
 
-
     def after_discount_price(self):
         if self.discount is None:
             return self.price
