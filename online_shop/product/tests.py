@@ -9,6 +9,9 @@ class DiscountTestCase(TestCase):
         Discount.objects.create(type="currency", value=10000)
         Discount.objects.create(type="percentage", value=20, max_discount=100000)
 
+    def test_str(self):
+        self.assertEqual(Discount.objects.get(id=1), 10000)
+
 
 class CategoryTestCase(TestCase):
     def setUp(self):
@@ -35,6 +38,7 @@ class CategoryTestCase(TestCase):
 
     def test_str(self):
         self.assertEqual(print(Category.objects.get(id=1)), "Electronic Devices")
+
 
 class ProductTestCase(TestCase):
     def setUp(self):
@@ -84,4 +88,11 @@ class ProductTestCase(TestCase):
         pass
 
 
+class CommentTestCase(TestCase):
+    def setUp(self):
+        Comment.objects.create(context="very good", product=Product.objects.get(1))
+        Comment.objects.create(context="very bad", product=Product.objects.get(2))
+        Comment.objects.create(context="not bad", product=Product.objects.get(3))
 
+    def test_str(self):
+        self.assertEqual(print(Comment.objects.get(id=1)), "very good")

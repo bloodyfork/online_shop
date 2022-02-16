@@ -66,9 +66,12 @@ class Discount(BaseModel):
     max_discount = models.PositiveIntegerField(help_text="Enter max amount of discount", null=True, blank=True)
 
     def __str__(self):
-        return f"{self.value} {self.type}"
+        return self.value
 
 
 class Comment(BaseModel):
     context = models.CharField(max_length=120)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.context
