@@ -21,3 +21,6 @@ class Address(BaseModel):
     exact_address = models.CharField(max_length=100, help_text="Enter your exact address")
     postal_code = models.PositiveIntegerField(blank=True, null=True)
     customer = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.province, self.city, self.exact_address}'
