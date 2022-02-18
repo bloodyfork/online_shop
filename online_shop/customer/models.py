@@ -1,12 +1,11 @@
-from django.contrib.auth.models import User
+from core.models import User
 from django.db import models
 from core.models import BaseModel
 # Create your models here.
 
 
-class Customer(BaseModel):
+class Customer(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=14, help_text="Enter your phone number")
 
     def __str__(self):
         return self.user.username
