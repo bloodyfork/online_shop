@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
 
@@ -13,6 +13,9 @@ class BaseManager(models.Manager):
 
 
 class BaseModel(models.Model):
+    class Meta:
+        abstract = True
+
     is_deleted = models.BooleanField(default=False)
     create_timestamp = models.DateTimeField(auto_now_add=True)
     modify_timestamp = models.DateTimeField(auto_now=True)
@@ -20,13 +23,21 @@ class BaseModel(models.Model):
 
     objects = BaseManager()
 
-    class Meta:
-        abstract = True
-
     def logical_delete(self):
         self.is_deleted = True
 
 
-# class User(AbstractUser):
-#     def __str__(self):
-#         return self.get_username()
+class MyUserManager(UserManager):
+
+    # def _create_user(self, username, email, password, **extra_fields):
+    #     return super()._create_user(username, email, password, **extra_fields)
+
+    def create_superuser(self, username=None, email=None, password=None, **extra_fields):
+        username = extra_fields['phone']
+        return super().create_superuser(username, email, password, **extra_fields)
+
+
+class User(AbstractUser):
+    objects = MyUserManager()
+    phone = models.CharField(max_length=13, unique=True)
+    USERNAME_FIELD = 'phone'
