@@ -10,13 +10,11 @@ def store(request):
 
 
 class ProductDetail(generics.RetrieveDestroyAPIView):
-
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
 class ProductList(generics.ListAPIView, mixins.ListModelMixin):
-
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
