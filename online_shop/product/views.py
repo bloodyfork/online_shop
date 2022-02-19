@@ -21,7 +21,7 @@ class CategoryBasedProductListView(generic.ListView):
     page_kwarg = 'pk'
 
 
-class ProductDetailVew(generic.DetailView):
+class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "product/ProductDetail.html"
     pk_url_kwarg = "PK"
