@@ -12,3 +12,9 @@ class CategoryListView(generic.ListView):
     model = Category
     template_name = "product/categories.html"
     context_object_name = 'category'
+
+
+class CategoryBasedProductListView(generic.ListView):
+    model = Product
+    template_name = "product/categorybaesedproduct.html"
+    context_object_name = 'products'
