@@ -16,7 +16,7 @@ class ProductShow(admin.ModelAdmin):
 
 
 class BrandShow(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ('name', 'logo')
     list_filter = ['name']
 
 

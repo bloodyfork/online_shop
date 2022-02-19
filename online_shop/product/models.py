@@ -9,7 +9,7 @@ class Product(BaseModel):
     name = models.CharField(max_length=35, unique=True, help_text="Enter name of the product ")
     brand = models.ForeignKey(to='Brand', on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, )
+    description = models.TextField(max_length=100, default="Unkown")
     image = models.ImageField(blank=True, null=True, upload_to='static/images/product',
                               help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
