@@ -6,11 +6,11 @@ from core.models import BaseModel
 # Create your models here.
 
 class Product(BaseModel):
-    name = models.CharField(max_length=25, unique=True, help_text="Enter name of the product ")
-    brand = models.CharField(max_length=18, help_text="Enter brand of product")
+    name = models.CharField(max_length=35, unique=True, help_text="Enter name of the product ")
+    brand = models.ForeignKey(to='Brand', on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
     description = models.CharField(max_length=100, )
-    image = models.ImageField(blank=True, null=True, upload_to='static/images',
+    image = models.ImageField(blank=True, null=True, upload_to='static/images/product',
                               help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
@@ -46,6 +46,11 @@ class Product(BaseModel):
                 raise "Error while precessing logic"
         else:
             raise "Error while precessing logic"
+
+
+class Brand(BaseModel):
+    name = models.CharField(max_length=20, help_text="name of a brand", unique=True)
+    logo = models.ImageField(upload_to="static/images/logos")
 
 
 class Category(BaseModel):
