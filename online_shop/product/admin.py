@@ -15,7 +15,13 @@ class ProductShow(admin.ModelAdmin):
     list_filter = ['name']
 
 
+class BrandShow(admin.ModelAdmin):
+    list_display = ['name']
+    list_filter = ['name']
+
+
 admin.site.register(Product, ProductShow)
 admin.site.register(Category, CategoryShow)
 admin.site.register(Discount)
 admin.site.register(Comment)
+admin.site.register(Brand, BrandShow)
