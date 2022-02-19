@@ -4,7 +4,11 @@
 <div class="row">
 {% for product in products %}
             <div class="col-lg-4">
-                <img class="i" alt="{% static 'images/placeholder.png' %}" src="{{ product.image }}">
+            {% if product.image is not None %}
+                <img class="i" alt='1' src="{{product.image.url}}">
+            {% else %}
+                <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">
+            {% endif %}
                 <div class="box-element product">
                     <h6><strong>{{ product.name }}</strong></h6>
                     <hr>
