@@ -9,12 +9,12 @@ class Product(BaseModel):
     name = models.CharField(max_length=35, unique=True, help_text="Enter name of the product ")
     brand = models.ForeignKey(to='Brand', on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
-    description = models.TextField(max_length=100, default="Unkown")
+    description = models.TextField(max_length=500, default="Unkown")
     image = models.ImageField(blank=True, null=True, upload_to='static/images/product',
                               help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
-    number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(1)])
+    number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(0)])
     discount = models.OneToOneField(to='Discount', on_delete=models.SET_NULL, blank=True, null=True)
 
     def check_in_stock(self):
