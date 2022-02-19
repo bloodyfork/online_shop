@@ -52,6 +52,9 @@ class Brand(BaseModel):
     name = models.CharField(max_length=20, help_text="name of a brand", unique=True)
     logo = models.ImageField(upload_to="static/images/logos")
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Category(BaseModel):
     class Meta:
