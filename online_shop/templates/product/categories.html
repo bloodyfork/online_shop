@@ -1,0 +1,30 @@
+{% extends 'core/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+{% for c in category%}
+    {% if c.base_category is None %}
+
+            <div class="col-lg-6">
+                <div class="box-element product centered">
+                    <h1><strong>{{ c.name }}</strong></h1>
+                    <hr>
+                    <hr>
+
+
+                <button class="btn btn-outline-success add-btn col-lg-12 p-3" href="{% url  %} }}">Visit Products</button>
+                </div>
+            </div>
+
+
+    {% endif %}
+
+
+
+
+
+{% endfor %}
+</div>
+
+{% endblock %}

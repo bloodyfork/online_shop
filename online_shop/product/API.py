@@ -4,12 +4,12 @@ from .models import Product, Category
 from .serializers import ProductSerializer
 
 
-class ProductDetail(generics.RetrieveDestroyAPIView):
+class ProductDetailAPI(generics.RetrieveDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
 
-class ProductList(generics.ListAPIView, mixins.ListModelMixin):
+class ProductListAPI(generics.ListAPIView, mixins.ListModelMixin):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 

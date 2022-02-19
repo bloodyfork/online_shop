@@ -102,4 +102,15 @@ h1,h2,h3,h4,h5,h6{
 	z-index: 10;
 }
 
+.centered{
+	text-align: center;
+
+}
+
+.base-category{
+	text-decoration: none;
+}
+
+
+
 /* end footer*/
