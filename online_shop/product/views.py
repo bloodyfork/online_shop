@@ -23,5 +23,5 @@ class CategoryBasedProductListView(generic.ListView):
 class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "product/ProductDetail.html"
-    context_object_name = "products"
-    slug_url_kwarg = "PN"
+    context_object_name = "product"
+    pk_url_kwarg = "pk"

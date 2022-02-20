@@ -2,6 +2,49 @@
 {% load static %}
 {% block content %}
 
-{{ products.name }}
+<div class="row">
+
+    <div class="box-element product col-lg-8">
+        <div class="col-lg-12 product centered">
+            <h1><strong>{{ product.name }}</strong></h1>
+        </div>
+        <br>
+        <br>
+        <br>
+        <h6 style=""> {{ product.description }}</h6>
+    </div>
+
+    <div class="box-element product col-lg-4">
+        {% if product.image is not None %}
+                <img class="i" alt='1' src="{{product.image.url}}">
+        {% else %}
+                <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">
+        {% endif %}
+
+
+        <div class="box-element">
+              {% if product.in_stock == True %}
+                <button class="btn btn-outline-secondary add-btn col-lg-12">Add to Cart</button>
+            {% else %}
+                <button class="btn btn-outline-secondary  col-lg-12" style="color: #c00101">Add to Cart</button>
+            {% endif %}
+
+            <br>
+            <br>
+            <h4 style=""><b>Brand:</b>   {{ product.brand }}</h4>
+            <h4 style="display: inline-block; float:right;">   <img class="" alt='Logo' src="{{product.brand.logo.url}}"></h4>
+            <h4 style=""><b>Price:</b>   ${{ product.price }}</h4>
+            {% if product.in_stock == True %}
+                <h4 style="color: green">In stock</h4>
+            {% else %}
+                <h4 style="color: #c00101">Out of stock</h4>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
 
 {% endblock %}
+
+
+

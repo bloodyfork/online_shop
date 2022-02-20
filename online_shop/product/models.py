@@ -20,8 +20,9 @@ class Product(BaseModel):
     def check_in_stock(self):
         if self.number_in_inventory == 0:
             self.in_stock = False
+            return self.in_stock
         else:
-            pass
+            return self.in_stock
 
     def after_discount_price(self):
         if self.discount is None:
