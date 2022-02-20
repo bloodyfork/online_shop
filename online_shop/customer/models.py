@@ -1,7 +1,6 @@
 from core.models import User
 from django.db import models
 from core.models import BaseModel
-from order.models import Cart
 
 
 class Customer(models.Model):
@@ -20,7 +19,6 @@ class Address(BaseModel):
     exact_address = models.CharField(max_length=100, help_text="Enter your exact address")
     postal_code = models.PositiveIntegerField(blank=True, null=True)
     customer = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
-    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'{self.exact_address}'
+        return self.exact_address
