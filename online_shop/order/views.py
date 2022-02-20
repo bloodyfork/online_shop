@@ -1,8 +1,13 @@
 from django.shortcuts import render
-
-# Create your views here.
+from order.models import Cart
 
 
 def cart(request):
-    context = {}
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
+        items = cart.orderitem_set.all()
+    else:
+        items = []
+    context = {"items":items}
     return render(request, "order/cart.html", context)
