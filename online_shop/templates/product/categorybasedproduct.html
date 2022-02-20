@@ -5,7 +5,9 @@
 
 <div class="row">
 {% for product in products %}
-    {% if product.category.base_category.id == pk %}
+{# make the hardcode go away #}
+{# make the hardcode go away #}
+    {% if product.category.base_category.name == "Jackets" %}
             <div class="col-lg-4">
             {% if product.image is not None %}
                 <img class="i" alt='1' src="{{product.image.url}}">
@@ -16,7 +18,7 @@
                     <h6><strong>{{ product.name }}</strong></h6>
                     <hr>
                     <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
-                    <a class="btn btn-outline-success add-btn" href="#">View</a>
+                    <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk%}">View</a>
                     <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
                 </div>
             </div>

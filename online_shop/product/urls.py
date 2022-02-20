@@ -5,9 +5,9 @@ from product.views import StoreListView, CategoryListView, CategoryBasedProductL
 
 urlpatterns = [
     path('store/', StoreListView.as_view(), name="store"),
-    path('CategoryProduct/page<int:pk>', CategoryBasedProductListView.as_view(), name="CategoryProduct"),
+    path('CategoryProduct/<slug:Category>', CategoryBasedProductListView.as_view(), name="CategoryProduct"),
     path('categories/', CategoryListView.as_view(), name="categories"),
-    path('ProductDetail/', ProductDetailView.as_view(), name='ProductDetail'),
+    path('ProductDetail/<int:pk>', ProductDetailView.as_view(), name='ProductDetail'),
 
     # APIS
     # APIS

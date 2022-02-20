@@ -18,10 +18,10 @@ class CategoryBasedProductListView(generic.ListView):
     model = Product
     template_name = "product/categorybasedproduct.html"
     context_object_name = 'products'
-    page_kwarg = 'pk'
 
 
 class ProductDetailView(generic.DetailView):
     model = Product
     template_name = "product/ProductDetail.html"
-    pk_url_kwarg = "PK"
+    context_object_name = "products"
+    slug_url_kwarg = "PN"
