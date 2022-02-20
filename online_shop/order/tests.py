@@ -1,7 +1,6 @@
 from unittest import TestCase
 from order.models import *
 from product.tests import Product
-from customer.tests import CustomerTestCase
 
 
 # Create your tests here.

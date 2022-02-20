@@ -4,7 +4,7 @@ from order.models import Cart
 
 def cart(request):
     # if request.user.is_authenticated:
-    #     customer = request.user.customer
+    #     customer = request.user
     #     cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
     #     items = cart.orderitem_set.all()
     # else:

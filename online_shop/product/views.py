@@ -20,8 +20,8 @@ class CategoryBasedProductListView(generic.ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        Slug = self.kwargs.get('slug')
-        query = Product.objects.filter(category__base_category__name=Slug)
+        slug = self.kwargs.get('slug')
+        query = Product.objects.filter(category__base_category__name=slug)
         return query
 
     # def get(self, request, *args, **kwargs):
