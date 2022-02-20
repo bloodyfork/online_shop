@@ -17,6 +17,9 @@ class Product(BaseModel):
     number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(0)])
     discount = models.OneToOneField(to='Discount', on_delete=models.SET_NULL, blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
     def check_in_stock(self):
         if self.number_in_inventory == 0:
             self.in_stock = False
