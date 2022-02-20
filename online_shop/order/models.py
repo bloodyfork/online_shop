@@ -16,7 +16,7 @@ class Cart(BaseModel):
     is_paid = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.customer
+        return f'Cart for: {self.customer.user.username}'
 
     def calculate_total_price(self):   ############# FRONT FUNCTION #############
         all_order_items = self.orderitem_set.all()
