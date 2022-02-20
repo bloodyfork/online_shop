@@ -23,4 +23,4 @@ class Address(BaseModel):
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'{self.province, self.city, self.exact_address}'
+        return f'{self.exact_address}'
