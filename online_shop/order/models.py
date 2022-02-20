@@ -50,7 +50,7 @@ class Cart(BaseModel):
 class OrderItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)
-    how_many = models.PositiveSmallIntegerField(help_text="How many of this product do you need")
+    how_many = models.PositiveSmallIntegerField(default=0, help_text="How many of this product do you need")
 
     def sum_of_prices_after_discount(self):
         res = self.product.after_discount_price() * self.how_many

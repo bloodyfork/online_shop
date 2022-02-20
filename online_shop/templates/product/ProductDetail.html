@@ -32,7 +32,7 @@
             <br>
             <br>
             <h4 style=""><b>Brand:</b>   {{ product.brand }}</h4>
-            <h4 style="display: inline-block; float:right;">   <img class="" alt='Logo' src="{{product.brand.logo.url}}"></h4>
+            <h4 style="display: inline-block; float:right;">   <img class="brand-logo" alt='Logo' src="{{product.brand.logo.url}}"></h4>
             <h4 style=""><b>Price:</b>   ${{ product.price }}</h4>
             {% if product.in_stock == True %}
                 <h4 style="color: green">In stock</h4>
