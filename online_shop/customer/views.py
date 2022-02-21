@@ -15,7 +15,7 @@ class Register(generic.FormView):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, "Account has been created with username" + username)
+            messages.success(request, "Account has been created with username " + username)
             return redirect(to='login')
 
         else:
