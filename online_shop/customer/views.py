@@ -1,5 +1,6 @@
-# from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect, render
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.contrib import messages
 from .forms import CreateUserForm
 # Create your views here.
@@ -23,8 +24,18 @@ class Register(generic.FormView):
             return redirect(to='register')
 
 
-class Login(generic.FormView):
-    form_class = CreateUserForm
+class Login(LoginView):
     template_name = "Customer/login.html"
+
+    def post(self, request, *args, **kwargs):
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(to='home')
+
+
 
 
