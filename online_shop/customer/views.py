@@ -24,35 +24,33 @@ class Register(generic.FormView):
             return redirect(to='register')
 
 
-# class Login(LoginView):
-#     template_name = "Customer/login.html"
+class Login(LoginView):
+    template_name = "Customer/login.html"
+
+    def post(self, request, *args, **kwargs):
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(to='home')
+
+        else:
+            messages.info(request, "incorrect Password or Username")
+            return render(request, 'Customer/login.html')
+
+# def login_page(request):
 #
-#     def post(self, request, *args, **kwargs):
+#     if request.method == "POST":
+#             username = request.POST.get('username')
+#             password = request.POST.get('password')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect(to='home')
 #
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect(to='home')
-
-
-def login_page(request):
-
-    if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect(to='home')
-
-            else:
-                messages.info(request, "incorrect Password or Username")
-
-    return render(request, 'Customer/login.html')
-
-
-
-
-
+#             else:
+#                 messages.info(request, "incorrect Password or Username")
+#
+#     return render(request, 'Customer/login.html')
