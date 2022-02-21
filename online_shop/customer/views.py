@@ -1,5 +1,5 @@
 # from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 from .forms import CreateUserForm
 # Create your views here.
@@ -14,8 +14,11 @@ class Register(generic.FormView):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to='register')
+            return redirect(to='login')
 
 
-class Login:
-    pass
+class Login(generic.FormView):
+    form_class = L
+
+# def Login(request):
+#     return render(request, 'Customer/login.html')
