@@ -18,17 +18,17 @@
 
               <div class="input-group mb-3">
                 <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
                 </div>
 
-                <input type="text" name="username" placeholder="Username..." class="form-control">
+                <input type="text" name="username" placeholder="phone" class="form-control">
               </div>
 
               <div class="input-group mb-2">
                 <div class="input-group-append">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="text" name="password" placeholder="Password" class="form-control">
+                <input type="password" name="password" placeholder="Password" class="form-control">
               </div>
 
               <div class="d-flex justify-content-center mt-3 login_container">
@@ -40,9 +40,11 @@
 
             {% for message in messages %}
 
-                <div style="background-color: #3CB371FF" class="rounded mt-2 p-1">
+
+                <div style="background-color: gray" class="rounded mt-2 p-1 centered">
                 <h6 style="color: snow">{{ message }}</h6>
                 </div>
+
 
             {% endfor %}
              <div class="mt-4">

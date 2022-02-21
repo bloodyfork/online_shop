@@ -13,19 +13,6 @@
 
             <form method="POST" action="" class="box-element p-5">
                 {% csrf_token %}
-                 <div class="input-group mb-3">
-                <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user"></i></span>
-                </div>
-                {{ form.first_name }}
-              </div>
-
-                 <div class="input-group mb-3">
-                <div class="input-group-append">
-                  <span class="input-group-text"><i class="fas fa-user"></i></span>
-                </div>
-                {{ form.last_name }}
-              </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-append">
@@ -74,12 +61,10 @@
 
       // All input fields
       var form_fields = document.getElementsByTagName('input')
-      form_fields[1].placeholder = 'Your Name';
-      form_fields[2].placeholder = 'Your Last Name';
-      form_fields[3].placeholder = 'Username';
-      form_fields[4].placeholder = 'Phone Number';
-      form_fields[5].placeholder = 'Enter password...';
-      form_fields[6].placeholder = 'Re-enter Password...';
+      form_fields[1].placeholder = 'Username';
+      form_fields[2].placeholder = 'Phone Number';
+      form_fields[3].placeholder = 'Enter password...';
+      form_fields[4].placeholder = 'Re-enter Password...';
 
 
       for (var field in form_fields) {
