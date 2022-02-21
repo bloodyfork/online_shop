@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from core.models import User
 from .forms import CreateUserForm
 # Create your views here.
 from django.views import generic
@@ -45,6 +47,7 @@ def logout_user(request):
     logout(request)
     return redirect(to='login')
 
+
 # def login_page(request):
 #
 #     if request.method == "POST":
@@ -59,3 +62,8 @@ def logout_user(request):
 #                 messages.info(request, "incorrect Password or Username")
 #
 #     return render(request, 'Customer/login.html')
+
+@login_required(login_url='login')
+class ViewProfile(generic.DetailView):
+    model = User
+    template_name = 'Customer/View_profile.html'
