@@ -2,9 +2,11 @@
 {% load static %}
 
 {% block content %}
+    {% csrf_token %}
 
     <form method="post" action="">
-    {{ form }}
+    {{ form.as_p }}
+    <input type="submit" name="create-user">
     </form>
 
 {% endblock %}
