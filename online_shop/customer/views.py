@@ -42,6 +42,7 @@ class Login(LoginView):
 
 
 def logout_user(request):
+    logout(request)
     return redirect(to='login')
 
 # def login_page(request):
