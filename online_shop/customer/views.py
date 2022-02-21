@@ -3,10 +3,14 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from core.models import User
+from .models import Customer
 from .forms import CreateUserForm
 # Create your views here.
 from django.views import generic
+
+from .models import Customer
 
 
 class Register(generic.FormView):
@@ -35,6 +39,7 @@ class Login(LoginView):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
+            Customer.objects.get_or_create(user=user)
             login(request, user)
             return redirect(to='home')
 
