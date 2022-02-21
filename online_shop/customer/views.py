@@ -40,6 +40,10 @@ class Login(LoginView):
             messages.info(request, "incorrect Password or Username")
             return render(request, 'Customer/login.html')
 
+
+def logout_user(request):
+    return redirect(to='login')
+
 # def login_page(request):
 #
 #     if request.method == "POST":
