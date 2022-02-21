@@ -64,6 +64,5 @@ def logout_user(request):
 #     return render(request, 'Customer/login.html')
 
 @login_required(login_url='login')
-class ViewProfile(generic.DetailView):
-    model = User
-    template_name = 'Customer/View_profile.html'
+def view_profile(request):
+    return render(request, 'Customer/View_profile.html')
