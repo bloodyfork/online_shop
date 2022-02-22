@@ -13,5 +13,5 @@ urlpatterns = [
     # APIS
     # APIS
 
-    path("ProductList/", ProductListAPI.as_view(), name="ProductListAPI")
+    path("ProductListAPI/", ProductListAPI.as_view(), name="ProductListAPI")
 ]

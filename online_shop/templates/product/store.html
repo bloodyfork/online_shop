@@ -1,7 +1,7 @@
 {% extends "core/main.html" %}
 {% load static %}
 {% block content %}
-<div class="row">
+<div class="row"  id="API-caller">
 {% for product in products %}
             <div class="col-lg-4">
             {% if product.image is not None %}
@@ -20,6 +20,47 @@
 
 {% endfor %}
 </div>
+
+    <script type="text/javascript">
+        product_list()
+
+
+        function product_list(){
+            var wrapper = document.getElementById('API-caller')
+            var  url = 'http://127.0.0.1:8000/product/ProductListAPI/'
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(
+                function (data){
+                    console.log("Data:",data)
+
+                    var  Products =data
+                    for (var product in Products){
+                        var item = `
+
+                          <div class="col-lg-4">
+                          {% if product.image is not None %}
+                          <img class="i" alt='1' src="{{product.image.url}}">
+                          {% else %}
+                          <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">
+                          {% endif %}
+                          <div class="box-element product">
+                          <h6><strong>{{ product.name }}</strong></h6>
+                          <hr>
+                          <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                          <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk%}">View</a>
+                          <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
+                          </div>
+                          </div>
+
+                        `
+                    }
+                }
+            )
+        }
+
+
+    </script>
 
 {% endblock %}
 

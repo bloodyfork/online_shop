@@ -13,8 +13,3 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'phone', 'password1', 'password2']
-
-
-
-
-#ToDo create login form
