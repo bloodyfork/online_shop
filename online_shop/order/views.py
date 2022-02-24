@@ -10,9 +10,11 @@ def cart(request):
         # customer = Customer.objects.get_or_create(user=request.user)
         cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
         items = cart.orderitem_set.all()
+        context = {"items": items, "cart": cart}
+
 
     else:
 
         items = []
-    context = {"items": items}
+        context = {"items": items}
     return render(request, "order/cart.html", context)

@@ -49,6 +49,14 @@ class Cart(BaseModel):
         else:
             pass
 
+    def total_count(self):
+        all_order_items = self.orderitem_set.all()
+        count = 0
+        for orders in all_order_items:
+            count += orders.how_many
+        return count
+
+
 
 class OrderItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
