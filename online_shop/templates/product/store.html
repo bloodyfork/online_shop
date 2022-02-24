@@ -45,7 +45,11 @@
 
                         var PK = i.id
 
-                        var item = `
+                        if(
+                            i['image'] != null
+                        ){
+
+                            var item = `
 
 
                            <div class="col-lg-4">
@@ -61,12 +65,31 @@
 
                               </div>
                            <div>
-
-
-
-
                         `
-                        wrapper.innerHTML += item
+                        wrapper.innerHTML += item}
+
+                    else {
+
+                         var item = `
+
+
+                           <div class="col-lg-4">
+                              <img class="i" alt='1' src="{% static 'images/placeholder.png' %}">
+
+                              <div class="box-element product">
+
+                                  <h6><strong>${ i.name }</strong></h6>
+                                  <hr>
+                                  <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
+                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
+
+                              </div>
+                           <div>
+                        `
+                        wrapper.innerHTML += item}
+
+
                     }
                 }
             )

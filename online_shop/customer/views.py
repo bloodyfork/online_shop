@@ -24,6 +24,7 @@ class Register(generic.FormView):
             return redirect(to='login')
 
         else:
+
             messages.warning(request, 'wrong input!')
             return redirect(to='register')
 
