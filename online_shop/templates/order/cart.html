@@ -28,7 +28,7 @@
             </div>
             <br>
             {% for item in items %}
-            <div class="box-element">
+            <div class="box-element mt-3">
                 <div class="cart-row">
                     <div style="flex:2"></div>
                     <div style="flex:2"><strong>Item</strong></div>
@@ -39,16 +39,16 @@
 
                  <div class="cart-row">
                     <div style="flex:2"><image src="{% static 'images/placeholder.png' %}" class="row-image"></image></div>
-                    <div style="flex:2">placeholder</div>
-                    <div style="flex:1">$10</div>
+                    <div style="flex:2">{{item.product.name}}</div>
+                    <div style="flex:1">${{item.product.price| floatformat}}</div>
                     <div style="flex:1">
-                        <p class="count-of-item">1</p>
+                        <p class="count-of-item">{{item.how_many}}</p>
                         <div class="count-of-item">
                             <i class="fa fa-angle-up" style="font-size:24px"></i>
                             <i class="fa fa-angle-down" style="font-size:24px"></i>
                         </div>
                     </div>
-                    <div style="flex:1">2</div>
+                    <div style="flex:1">${{item.sum_of_prices_after_discount}}</div>
                 </div>
 
             </div>
