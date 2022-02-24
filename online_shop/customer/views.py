@@ -3,11 +3,12 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views import generic
+from .models import Customer
+from core.models import User
+from .models import Customer
 from .forms import CreateUserForm
 # Create your views here.
-from django.views import generic
-
-from .models import Customer
 
 
 class Register(generic.FormView):
@@ -23,8 +24,7 @@ class Register(generic.FormView):
             return redirect(to='login')
 
         else:
-            error = form.errors
-            messages.warning(request, error)
+            messages.warning(request, 'wrong input!')
             return redirect(to='register')
 
 
@@ -33,7 +33,7 @@ class Login(LoginView):
 
     def post(self, request, *args, **kwargs):
 
-        username = request.POST.get('username')
+        username = request.POST.get('phone')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
