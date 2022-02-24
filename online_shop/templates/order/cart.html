@@ -16,9 +16,9 @@
 
                 <table class="table">
                     <tr>
-                        <th><h5>Items: <strong></strong></h5></th>
-                        <th><h5>Total price: <strong>{{cart.calculate_total_price}}</strong></h5></th>
-                        <th><h5>Final price: <strong>{{cart.calculate_final_price}}</strong></h5></th>
+                        <th><h5>Items: <strong>{{ cart.total_count }}</strong></h5></th>
+                        <th><h5>Total price: <strong>${{cart.calculate_total_price}}</strong></h5></th>
+                        <th><h5>Final price: <strong>${{cart.calculate_final_price}}</strong></h5></th>
                         <th>
                             <a style="float: right; margin: 5px" class="btn btn-success" href="#">Checkout</a>
                         </th>

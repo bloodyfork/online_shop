@@ -30,6 +30,7 @@ class Cart(BaseModel):
         all_order_items = self.orderitem_set.all()
         if self.off_code is not None:
             for order in all_order_items:
+
                 discounted_prices = order.sum_of_prices_after_discount()
                 self.final_price += discounted_prices
 
@@ -38,10 +39,11 @@ class Cart(BaseModel):
             return self.final_price
 
         else:
+
             for order in all_order_items:
                 discounted_prices = order.sum_of_prices_after_discount()
                 self.final_price += discounted_prices
-                return self.final_price
+            return self.final_price
 
     def check_is_paid(self):
         if self.is_paid is True:
