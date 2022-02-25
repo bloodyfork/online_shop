@@ -5,8 +5,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from .models import Customer
-from core.models import User
-from .models import Customer
 from .forms import CreateUserForm
 # Create your views here.
 
@@ -24,8 +22,9 @@ class Register(generic.FormView):
             return redirect(to='login')
 
         else:
+            e = form.errors
 
-            messages.warning(request, 'wrong input!')
+            messages.warning(request, e)
             return redirect(to='register')
 
 
