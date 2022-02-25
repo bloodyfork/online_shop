@@ -14,7 +14,7 @@
                 <div class="box-element product">
                     <h6><strong>{{ product.name }}</strong></h6>
                     <hr>
-                    <button product-id="{{ product.id }}" class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
+                    <button data-product="{{ product.id }}" data-action="add" class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
                     <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk%}">View</a>
                     <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
                 </div>
@@ -23,4 +23,5 @@
 {% endfor %}
 </div>
 
+<script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
