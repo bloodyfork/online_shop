@@ -46,7 +46,7 @@
                         var PK = i.id
 
                         if(
-                            i['image'] != null
+                            i['image'] != null && i['in_stock'] === true
                         ){
 
                             var item = `
@@ -58,6 +58,7 @@
                               <div class="box-element product">
 
                                   <h6><strong>${ i.name }</strong></h6>
+                                  <h6 style="color: #008000FF"><strong>In Stock</strong></h6>
                                   <hr>
                                   <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
                                   <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
@@ -68,7 +69,40 @@
                         `
                         wrapper.innerHTML += item}
 
-                    else {
+                    else if(
+                         i['image'] != null && i['in_stock'] === false
+
+
+                    ) {
+
+                         var item = `
+
+
+                           <div class="col-lg-4">
+                              <img class="i" alt='1' src="${i['image']}">
+
+                              <div class="box-element product">
+
+                                  <h6><strong>${ i.name }</strong></h6>
+                                  <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
+                                  <hr>
+                                  <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
+                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
+
+                              </div>
+                           <div>
+                        `
+                        wrapper.innerHTML += item}
+
+
+
+
+                    else if(
+                         i['image'] === null && i['in_stock'] === true
+
+
+                    ) {
 
                          var item = `
 
@@ -79,6 +113,29 @@
                               <div class="box-element product">
 
                                   <h6><strong>${ i.name }</strong></h6>
+                                  <h6 style="color: #008000FF"'><strong>In Stock</strong></h6>
+                                  <hr>
+                                  <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
+                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
+
+                              </div>
+                           <div>
+                        `
+                        wrapper.innerHTML += item}
+
+                    else{
+
+                         var item = `
+
+
+                           <div class="col-lg-4">
+                              <img class="i" alt='1' src="{% static 'images/placeholder.png' %}">
+
+                              <div class="box-element product">
+
+                                  <h6><strong>${ i.name }</strong></h6>
+                                  <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
                                   <hr>
                                   <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
                                   <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
