@@ -1,16 +1,8 @@
 from rest_framework import serializers
-from product.models import Category, Product
+from order.models import Cart
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
-        fields = '__all__'
-
-    car_set = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), many=True)
-
-
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
+        model = Cart
         fields = "__all__"
