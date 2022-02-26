@@ -6,7 +6,7 @@ from product.models import Product
 class AddToCart(generics.CreateAPIView):
     serializer_class = CartSerializer
 
-    def post(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
 
         user = request.user
         product = Product.objects.get()

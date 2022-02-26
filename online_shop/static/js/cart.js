@@ -6,14 +6,37 @@ setTimeout(() => {
     for( let i=0; i<AddToCart.length; i++){
         AddToCart[i].addEventListener('click', function () {
 
-            var  ProductId = this.dataset.product
-            var  action = this.dataset.action
-            console.log('ProductId:', ProductId, 'action:', action)
-            console.log("USER:", user)
+            let  ProductId = this.dataset.product
+            let  action = this.dataset.action
+
+
+            console.log('ProductId:', ProductId, 'action:', action);
+            console.log('USER:', user)
+            if(user === 'AnonymousUser'){
+                console.log("not logged in")
+            }else {
+                UpdateUserOrder(ProductId, action)
+            }
+
+
         })
     }
 
 
 
 }, 1000);
+
+function UpdateUserOrder(ProductId, action){
+    console.log('logged in')
+
+    var url = '/AddToCart/'
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({'ProductId': ProductId ,'action': action})
+    })
+}
 
