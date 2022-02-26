@@ -9,6 +9,7 @@ setTimeout(() => {
             var  ProductId = this.dataset.product
             var  action = this.dataset.action
             console.log('ProductId:', ProductId, 'action:', action)
+            console.log("USER:", user)
         })
     }
 
