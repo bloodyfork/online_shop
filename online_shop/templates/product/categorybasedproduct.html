@@ -3,31 +3,58 @@
 
 {% block content %}
 
-{#    {% for category in categories %}#}
-{#        <div class="box-element">#}
-{#        <h1>{{ categories }}</h1>#}
-{#        </div>#}
-{#    {% endfor %}#}
+    {% for category in categories %}
+        <div class="box-element centered mt-3 mb-1">
+            <h1>{{ category }}</h1>
+        </div>
 
-<div class="row">
-{% for product in products %}
-            <div class="col-lg-4">
-            {% if product.image is not None %}
-                <img class="i" alt='1' src="{{product.image.url}}">
-            {% else %}
-                <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">
-            {% endif %}
-                <div class="box-element product">
-                    <h6><strong>{{ product.name }}</strong></h6>
-                    <hr>
-                    <button data-product="{{ product.id }}" data-action="add" data-c ="{{ csrf_token }}" data-url="{% url 'AddToCart' %}" data-product-name='{{ product.name }}' class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
-                    <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk %}">View</a>
-                    <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
-                </div>
-            </div>
+        <div class="row">
+        {% for product in category.product_set.all %}
+                    <div class="col-lg-4">
+                    {% if product.image is not None %}
+                     <img class="i" alt='1' src="{{product.image.url}}">
+                    {% else %}
+                        <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">
+                    {% endif %}
+                        <div class="box-element product">
+                            <h6><strong>{{ product.name }}</strong></h6>
+                            {% if product.in_stock == True %}
+                                <h6 style="color: #008000FF"><strong>In Stock</strong></h6>
 
-{% endfor %}
-</div>
+                             {% else %}
+                                <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
+
+                            {% endif %}
+                            <hr>
+                            <button data-product="{{ product.id }}" data-action="add" data-c ="{{ csrf_token }}" data-url="{% url 'AddToCart' %}" data-product-name='{{ product.name }}' class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
+                            <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk %}">View</a>
+                            <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
+                        </div>
+                    </div>
+
+        {% endfor %}
+        </div>
+    {% endfor %}
+
+{#<div class="row">#}
+{#{% for product in products %}#}
+{#            <div class="col-lg-4">#}
+{#            {% if product.image is not None %}#}
+{#                <img class="i" alt='1' src="{{product.image.url}}">#}
+{#            {% else %}#}
+{#                <img class="i" alt='placeholder' src="{% static 'images/placeholder.png'%}">#}
+{#            {% endif %}#}
+{#                <div class="box-element product">#}
+{#                    <h6><strong>{{ product.name }}</strong></h6>#}
+{#                    <hr>#}
+{#                    <button data-product="{{ product.id }}" data-action="add" data-c ="{{ csrf_token }}" data-url="{% url 'AddToCart' %}" data-product-name='{{ product.name }}' class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>#}
+{#                    <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk %}">View</a>#}
+{#                    <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#{% endfor %}#}
+{#</div>#}
 
 <script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}

@@ -25,15 +25,15 @@ class CategoryBasedProductListView(generic.ListView):
         return query
 
 
-# class FrontCategories(generic.ListView):
-#     model = Category
-#     template_name = "product/categorybasedproduct.html"
-#     context_object_name = 'categories'
-#
-#     def get_queryset(self):
-#         slug = self.kwargs.get('slug')
-#         query = Category.objects.get(base_category__name=slug)
-#         return query
+class FrontCategories(generic.ListView):
+    model = Category
+    template_name = "product/categorybasedproduct.html"
+    context_object_name = 'categories'
+
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        query = Category.objects.filter(base_category__name=slug)
+        return query
 
 
 class ProductDetailView(generic.DetailView):
