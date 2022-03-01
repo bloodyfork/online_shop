@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="row" id="API-caller">
+<div class="row" id="API-caller" data-Url="{% url 'ProductListAPI' %}">
 
 
 </div>
@@ -33,7 +33,7 @@
 
         function product_list(){
             var wrapper = document.getElementById('API-caller')
-            var  url = 'http://127.0.0.1:8000/product/ProductListAPI/'
+            var  url = document.getElementById('API-caller').getAttribute('data-url')
             fetch(url)
             .then((resp) => resp.json())
             .then(
