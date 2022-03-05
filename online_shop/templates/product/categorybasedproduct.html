@@ -30,6 +30,7 @@
                             <button data-product="{{ product.id }}" data-action="add" data-c ="{{ csrf_token }}" data-url="{% url 'AddToCart' %}" data-product-name='{{ product.name }}' class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
                             {% else %}
 
+
                                 <button class="btn btn-outline-danger" style="color: #c00101">Add to Cart</button>
 
                             {% endif %}

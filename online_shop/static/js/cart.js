@@ -39,18 +39,18 @@ function UpdateUserOrder(ProductId, action, MyUrl, token){
         method: 'POST',
         headers: {
             'Content-Type':'application/json',
-            'X-CSRFToken': token
+            'Accept': 'application/json',
+            'X-CSRFToken': token,
         },
         body: JSON.stringify({'ProductId': ProductId ,'action': action, })
     })
         .then((response) =>{
-            return response.json()
+            return response.json();
         })
 
-     .then((data) =>{
-         console.log('data:',data)
+        .then((data)=> console.log('data:',data)
+        )
 
-        })
 }
 
 

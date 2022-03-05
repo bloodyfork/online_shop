@@ -10,5 +10,6 @@ urlpatterns = [
     # API
     # API
     path('AddToCart/', AddToCart.as_view(), name='AddToCart'),
+    # path('AddToCart/', updateItem, name='AddToCart'),
 
 ]
