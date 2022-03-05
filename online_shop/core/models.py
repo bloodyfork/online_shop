@@ -45,3 +45,10 @@ class User(AbstractUser):
     objects = MyUserManager()
     phone = models.CharField(max_length=13, unique=True)
     USERNAME_FIELD = 'phone'
+
+    def save(self, *args, **kwargs):
+        self.username = self.phone
+        if User.objects.filter(id=self.id):
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
+

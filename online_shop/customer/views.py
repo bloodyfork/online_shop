@@ -17,12 +17,13 @@ class Register(generic.FormView):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, "Account has been created with username " + username)
+            phone = form.cleaned_data.get('phone')
+            messages.success(request, "Account has been created with phone number " + phone)
             return redirect(to='login')
 
         else:
             e = form.errors
+            print(form.cleaned_data)
 
             messages.warning(request, e)
             return redirect(to='register')

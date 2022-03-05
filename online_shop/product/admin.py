@@ -11,7 +11,7 @@ class CategoryShow(admin.ModelAdmin):
 
 
 class ProductShow(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'brand', 'price']
     list_filter = ['name']
 
 

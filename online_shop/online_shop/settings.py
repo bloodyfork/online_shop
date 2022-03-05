@@ -51,23 +51,23 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-indigo",
-    "accent": "accent-green",
-    "navbar": " navbar-dark",
+    "brand_colour": "navbar-success",
+    "accent": "accent-success",
+    "navbar": "navbar-success navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": False,
     "layout_boxed": False,
     "footer_fixed": False,
-    "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-green",
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-lime",
     "sidebar_nav_small_text": True,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
-    "sidebar_nav_compact_style": False,
+    "sidebar_nav_compact_style": True,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
-    "theme": "slate",
-    # "theme": "pulse",
+    # "theme": "slate",
+    "theme": "pulse",
     "dark_mode_theme": "slate",
     "button_classes": {
         "primary": "btn-outline-primary",
@@ -78,6 +78,27 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-outline-success"
     },
     "actions_sticky_top": True
+}
+
+JAZZMIN_SETTINGS = {
+# title of the window (Will default to current_admin_site.site_title if absent or None)
+"site_title": "Dashboard",
+# Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+"site_header": "RD-Shop-Dashboard",
+"show_ui_builder": True,
+"icons": {
+"auth": "fa fa-users-cog",
+"core.User": "fa fa-user",
+"customer.Customer": "fa fa-users",
+"customer.Address": "fa fa-map-marker",
+"order.Cart": "fa fa-shopping-cart",
+"order.OffCode": 'fas fa-money-bill',
+"order.OrderItem": 'fas fa-receipt',
+"product.Comment": 'fas fa-comment',
+"product.Discount": "fa fa-percent",
+"product.Category": "fa fa-list-alt",
+"product.Product": 'fas fa-tshirt',
+}
 }
 
 

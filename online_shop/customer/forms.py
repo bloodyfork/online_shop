@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib import messages
 
 from core.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -15,7 +14,7 @@ class LoginForm(forms.ModelForm):
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'phone', 'password1', 'password2']
+        fields = ['first_name', 'phone', 'password1', 'password2']
 
 
     def clean_phone(self):
@@ -24,6 +23,8 @@ class CreateUserForm(UserCreationForm):
 
         if re.search(regex, self.cleaned_data.get('phone')) is None:
             raise forms.ValidationError('Please Enter Valid a Phone Number')
+
+        return self.cleaned_data.get('phone')
 
 
 
