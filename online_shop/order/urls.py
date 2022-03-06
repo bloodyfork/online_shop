@@ -9,7 +9,7 @@ urlpatterns = [
     # API
     # API
     # API
-    path('AddToCart/', AddToCart.as_view(), name='AddToCart'),
-    # path('AddToCart/', updateItem, name='AddToCart'),
+    # path('AddToCart/', AddToCart.as_view(), name='AddToCart'),
+    path('AddToCart/', update_cart, name='AddToCart'),
 
 ]

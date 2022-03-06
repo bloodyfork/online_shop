@@ -59,7 +59,6 @@ class Cart(BaseModel):
         return count
 
 
-
 class OrderItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cart = models.ForeignKey(to=Cart, on_delete=models.CASCADE)

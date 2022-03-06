@@ -10,6 +10,11 @@
 
         <div class="row">
         {% for product in category.product_set.all %}
+                 {% for message in messages %}
+                    <div style="background-color: #C00101FF" class="rounded mt-2 p-1 centered">
+                        <h6 style="color: snow; ">{{ message }}</h6>
+                    </div>
+                {% endfor %}
                     <div class="col-lg-4">
                     {% if product.image is not None %}
                      <img class="i" alt='1' src="{{product.image.url}}">

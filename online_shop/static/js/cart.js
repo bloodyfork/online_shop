@@ -42,7 +42,7 @@ function UpdateUserOrder(ProductId, action, MyUrl, token){
             'Accept': 'application/json',
             'X-CSRFToken': token,
         },
-        body: JSON.stringify({'ProductId': ProductId ,'action': action, })
+        body: JSON.stringify({'ProductId': ProductId ,'action': action, 'url': MyUrl, })
     })
         .then((response) =>{
             return response.json();

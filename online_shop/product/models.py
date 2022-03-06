@@ -27,6 +27,18 @@ class Product(BaseModel):
         else:
             return self.in_stock
 
+    def add_order_item(self):
+        if self.check_in_stock():
+            self.number_in_inventory -= 1
+            return True
+        else:
+            return False
+
+    def remove_order_item(self):
+        self.number_in_inventory += 1
+
+        return self.number_in_inventory
+
     def after_discount_price(self):
         if self.discount is None:
             return self.price
