@@ -3,7 +3,7 @@
 {% block content %}
 
  {% for message in messages %}
-     <div style="background-color: #C00101FF" class="rounded mt-2 p-1 centered">
+     <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">
          <h6 style="color: snow; ">{{ message }}</h6>
      </div>
  {% endfor %}
@@ -43,9 +43,8 @@
             .then((resp) => resp.json())
             .then(
                 function (data){
-                    console.log("Data:",data)
 
-                    var  product =data
+                    var  product = data
                     for (var i of product){
 
                         var PK = i.id
@@ -157,5 +156,6 @@
             )
         }
         </script>
+
 <script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}

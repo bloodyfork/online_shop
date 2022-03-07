@@ -48,7 +48,9 @@ function UpdateUserOrder(ProductId, action, MyUrl, token){
             return response.json();
         })
 
-        .then((data)=> console.log('data:',data)
+        .then((data)=>
+            location.reload()
+
         )
 
 }

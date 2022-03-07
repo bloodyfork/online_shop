@@ -3,6 +3,12 @@
 
 {% block content %}
 
+     {% for message in messages %}
+         <div style="background-color: gray " class="sticky-top rounded mt-2 p-1 centered" id="message-cat">
+             <h6 style="color: snow; ">{{ message }}</h6>
+         </div>
+     {% endfor %}
+
     {% for category in categories %}
         <div class="box-element centered mt-3 mb-1">
             <h1>{{ category }}</h1>
@@ -10,11 +16,7 @@
 
         <div class="row">
         {% for product in category.product_set.all %}
-                 {% for message in messages %}
-                    <div style="background-color: #C00101FF" class="rounded mt-2 p-1 centered">
-                        <h6 style="color: snow; ">{{ message }}</h6>
-                    </div>
-                {% endfor %}
+
                     <div class="col-lg-4">
                     {% if product.image is not None %}
                      <img class="i" alt='1' src="{{product.image.url}}">
@@ -67,6 +69,8 @@
 {##}
 {#{% endfor %}#}
 {#</div>#}
+
+
 
 <script src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
