@@ -31,7 +31,6 @@ setTimeout(() => {
 }, 1000);
 
 function UpdateUserOrder(ProductId, action, MyUrl, token){
-    console.log('logged in')
 
     var url = MyUrl
 
@@ -45,13 +44,12 @@ function UpdateUserOrder(ProductId, action, MyUrl, token){
         body: JSON.stringify({'ProductId': ProductId ,'action': action, 'url': MyUrl, })
     })
         .then((response) =>{
+             window.location.reload();
             return response.json();
         })
 
-        .then((data)=>
-            location.reload()
 
-        )
+
 
 }
 

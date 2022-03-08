@@ -5,6 +5,7 @@ from product.models import Product
 from customer.models import Customer
 from order.models import Cart
 from rest_framework.response import Response
+from django.shortcuts import HttpResponse
 # import json
 # from django.shortcuts import redirect
 
@@ -30,10 +31,12 @@ class AddToCart(generics.CreateAPIView):
                 item_list.append(items.product.name)
 
             if product.name in item_list:
-                messages.warning(request, 'Product already exists in your cart!')
+
+                m = messages.warning(request, 'Product already exists in your cart!')
+                return HttpResponse(m)
 
             else:
-                messages.info(request, 'Item added tp your cart!')
+                messages.info(request, 'Item added to your cart!')
                 order_item, created = OrderItem.objects.create(cart=cart, product=product, how_many=1)
                 order_item.save()
                 serializer = OrderItemSerializer(order_item)
