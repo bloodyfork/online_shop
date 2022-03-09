@@ -19,7 +19,6 @@ class AddToCart(generics.CreateAPIView):
         if user.is_authenticated:
 
             product_id = data['ProductId']
-            action = data['action']
 
             product = Product.objects.get(id=product_id)
             customer = Customer.objects.get(user__phone=user)
@@ -45,46 +44,3 @@ class AddToCart(generics.CreateAPIView):
         else:
             pass
             # ToDO make it for not registered users
-
-
-
-
-# def update_cart(request):
-#
-#     data = json.loads(request.body)
-#     product_id = data['ProductId']
-#     action = data['action']
-#     # url = request.path
-#
-#     customer = request.user.customer
-#     product = Product.objects.get(id=product_id)
-#     cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
-#     order_item, created = OrderItem.objects.get_or_create(cart=cart, product=product)
-#
-#     if product.add_order_item():
-#
-#         if action == 'add':
-#             order_item.how_many += 1
-#             messages.info(request, "item added to your cart")
-#
-#     elif not product.add_order_item():
-#         messages.info(request, 'Product is out of stock')
-#
-#     elif action == 'remove':
-#         product.remove_order_item()
-#         order_item.how_many -= 1
-#         messages.info(request, "item was removed from your card")
-#         return redirect('store')
-#
-#     order_item.save()
-#
-#     if order_item.how_many <= 0:
-#         order_item.delete()
-
-
-
-
-
-
-
-

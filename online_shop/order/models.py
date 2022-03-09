@@ -68,6 +68,21 @@ class OrderItem(BaseModel):
         res = self.product.after_discount_price() * self.how_many
         return res
 
+    def increase_how_many(self):   # UNUSED ##################
+        product_quantiy = self.product.number_in_inventory
+        if product_quantiy >= self.how_many + 1:
+            self.how_many += 1
+            return True
+
+        else:
+            return False
+
+    def decrease_how_many(self):   # UNUSED ##################
+        if self.how_many - 1 == 0:
+            self.delete()
+        else:
+            self.how_many -= 1
+
 
 class OffCode(BaseModel):
     the_code = models.CharField(max_length=10, help_text="Enter code for offer", unique=True)

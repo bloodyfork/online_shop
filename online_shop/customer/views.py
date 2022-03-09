@@ -52,21 +52,6 @@ def logout_user(request):
     return redirect(to='login')
 
 
-# def login_page(request):
-#
-#     if request.method == "POST":
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect(to='home')
-#
-#             else:
-#                 messages.info(request, "incorrect Password or Username")
-#
-#     return render(request, 'Customer/login.html')
-
 @login_required(login_url='login')
 def view_profile(request):
     return render(request, 'Customer/View_profile.html')

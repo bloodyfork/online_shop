@@ -45,8 +45,8 @@
                     <div style="flex:1">
                         <p class="count-of-item">{{item.how_many}}</p>
                         <div class="count-of-item">
-                            <i class="fa fa-angle-up" style="font-size:24px"></i>
-                            <i class="fa fa-angle-down" style="font-size:24px"></i>
+                            <button class=" btn btn-outline-secondary up"><i class="fa fa-angle-up" style="font-size:24px"></i></button>
+                            <button class=" btn btn-outline-secondary down"><i class="fa fa-angle-down" style="font-size:24px"></i></button>
                         </div>
                     </div>
                     <div style="flex:1">${{item.sum_of_prices_after_discount}}</div>
@@ -56,5 +56,10 @@
             {% endfor %}
         </div>
     </div>
+
+    <script>
+
+
+    </script>
 
 {% endblock %}

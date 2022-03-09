@@ -12,6 +12,7 @@ def cart(request):
         context = {"items": items, "cart": cart}
 
     else:
+        # ToDO make it for not registered users#
         items = []
         context = {"items": items}
     return render(request, "order/cart.html", context)
