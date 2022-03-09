@@ -55,12 +55,20 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def view_profile(request):
-    return render(request, 'Customer/View_profile.html')
+    data = Address.objects.filter(customer__user=request.user)
+    context = {'data': data}
+    return render(request, 'Customer/View_profile.html', context)
 
-
-class ViewProfile(ListView):
-    model = Address
-    template_name = 'Customer/view_profile.html'
+# class ViewProfile(ListView):
+#     model = Address
+#     template_name = 'Customer/view_profile.html'
+#     context_object_name = 'addresses'
+#
+#     def get(self, request, *args, **kwargs):
+#         query = Address.objects.filter(customer__user=request.user)
+#         return query
 
     # def get_queryset(self):
-    #     query = Address.objects.filter()
+    #     query = Address.objects.filter(customer__user=)
+    #     return query
+
