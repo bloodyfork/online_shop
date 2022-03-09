@@ -4,8 +4,9 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views import generic
-from .models import Customer
+from .models import Customer, Address
 from .forms import CreateUserForm
+from django.views.generic.list import ListView
 # Create your views here.
 
 
@@ -55,3 +56,11 @@ def logout_user(request):
 @login_required(login_url='login')
 def view_profile(request):
     return render(request, 'Customer/View_profile.html')
+
+
+class ViewProfile(ListView):
+    model = Address
+    template_name = 'Customer/view_profile.html'
+
+    # def get_queryset(self):
+    #     query = Address.objects.filter()
