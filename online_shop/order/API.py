@@ -44,3 +44,12 @@ class AddToCart(generics.CreateAPIView):
         else:
             pass
             # ToDO make it for not registered users
+
+
+class OrderItemUpdateView(generics.UpdateAPIView):
+    serializer_class = OrderItemSerializer
+    queryset = OrderItem.objects.all()
+
+    def partial_update(self, request, *args, **kwargs):
+
+        return super().partial_update(request, *args, **kwargs)
