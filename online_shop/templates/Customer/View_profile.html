@@ -40,9 +40,9 @@
 
 
 
-<div id="AddressBar" class="box-element mt-2 col-lg-12">
+<div class="box-element mt-2 col-lg-12">
             {% for A in addresses %}
-                <div class="box-element mt-2">
+                <div data-id="{{ A.id }}" class="box-element mt-2 AddressBar">
                     <div class="cart-row">
 
                         <div style="flex:3"><strong>Province</strong></div>
@@ -58,7 +58,7 @@
                         <div class="mr-4" style="flex:3">{{ A.postal_code }}</div>
 
                         <button class="centered btn btn-info col-lg-1 mr-1">Edit</button>
-                        <button id="DeleteAddress" onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
+                        <button data-action="DeleteAddress" onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
                     </div>
 
                 </div>
@@ -73,17 +73,16 @@
     function DeleteAddress(value){
 
         $.ajax({
-            url: "{% url 'DeleteAddress' pk=12345 %}".replace(/12345/, value),
+            url: "{% url 'DeleteAddress' pk=0 %}".replace(/0/, value),
             {#url: "{% url 'DeleteAddress'  %}",#}
             method: 'DELETE',
             headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
+                'X-CSRFToken': '{{ csrf_token }}'
             },
-            data: {
-                'the_id' :  value
-            },
+
             success: function () {
-                $('#AddressBar').remove()
+                 let r = $("[data-id=value]");
+                 console.log(r)
             },
         })
 
