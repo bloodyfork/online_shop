@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.views import generic
 from .models import Customer, Address
 from .forms import CreateUserForm
@@ -53,20 +53,19 @@ def logout_user(request):
     return redirect(to='login')
 
 
-@login_required(login_url='login')
-def view_profile(request):
-    data = Address.objects.filter(customer__user=request.user)
-    context = {'data': data}
-    return render(request, 'Customer/View_profile.html', context)
+class ViewProfile(ListView, LoginRequiredMixin):
+    model = Address
+    template_name = 'Customer/view_profile.html'
+    context_object_name = 'addresses'
+
+    def get_queryset(self):
+        query = Address.objects.filter(customer__user=self.request.user)
+        return query
 
 
-# class ViewProfile(ListView, LoginRequiredMixin):
-#     model = Address
-#     template_name = 'Customer/view_profile.html'
-#     context_object_name = 'addresses'
-#
-#
-#     def get_queryset(self):
-#         query = Address.objects.filter(customer__user=self.request.user)
-#         return query
 
+# @login_required(login_url='login')
+# def view_profile(request):
+#     data = Address.objects.filter(customer__user=request.user)
+#     context = {'data': data}
+#     return render(request, 'Customer/View_profile.html', context)
