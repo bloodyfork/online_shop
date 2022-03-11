@@ -70,13 +70,71 @@
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <form>
+
+                    <label for="Province">Province:</label>
+                    <input style="flex:1" type="text" id="Province" >
+
+
+
+                    <label for="City">City:</label>
+                    <input style="flex:1" type="text" id="City">
+
+
+
+                    <label for="Exact">Exact Address:</label>
+                    <input style="flex:1" type="text" id="Exact" >
+
+
+
+                    <label for="Zip">Postal Code:</label>
+                    <input style="flex:1" type="number" id="Zip">
+                <input class="btn btn-success" onclick="CreateAddress()" value="Submit">
+            </form>
         </div>
 
 </div>
          <button id="myBtn" class="centered btn btn-info col-lg-12">Add Address</button>
 
 </div>
+
+     <script>
+
+
+
+
+
+    function CreateAddress(){
+         let province = $('#Province').val()
+         let city = $('#City').val()
+         let exact = $('#Exact').val()
+         let zip = $('#Zip').val()
+
+        $.ajax({
+            url: "{% url 'CreateAddress' %}",
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            data: {
+                'province': province,
+                'city': city,
+                'zip': zip,
+                'exact_address': exact,
+            },
+
+            success: function () {
+
+
+            },
+        })
+
+    }
+
+
+
+
+    </script>
 
 
 

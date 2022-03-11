@@ -1,4 +1,4 @@
-from rest_framework.generics import DestroyAPIView, UpdateAPIView
+from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView
 from customer.models import Address
 from customer.serializers import AddressSerializer
 
@@ -12,3 +12,12 @@ class UpdateAPIAddress(UpdateAPIView):
     serializer_class = AddressSerializer
     queryset = Address
     lookup_field = 'pk'
+
+
+class CreateAPIAddress(CreateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address
+
+    def create(self, request, *args, **kwargs):
+        print(request.data['zip'])
+
