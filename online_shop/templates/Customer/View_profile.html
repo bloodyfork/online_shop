@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+
+{#    {% for message in messages %}#}
+{#        <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">#}
+{#            <h6 style="color: snow; ">{{ message }}</h6>#}
+{#        </div>#}
+{#    {% endfor %}#}
     <div class="row">
 
     <div class="box-element product col-lg-8">
@@ -89,7 +95,8 @@
 
                     <label for="Zip">Postal Code:</label>
                     <input style="flex:1" type="number" id="Zip">
-                <input class="btn btn-success" onclick="CreateAddress()" value="Submit">
+
+                <input class="btn btn-success" onclick="CreateAddress()" type="submit" value="Submit">
             </form>
         </div>
 
@@ -112,7 +119,7 @@
 
         $.ajax({
             url: "{% url 'CreateAddress' %}",
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'X-CSRFToken': '{{ csrf_token }}'
             },
@@ -122,7 +129,6 @@
                 'zip': zip,
                 'exact_address': exact,
             },
-
 
             success: function () {
 
