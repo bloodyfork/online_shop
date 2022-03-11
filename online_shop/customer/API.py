@@ -1,7 +1,16 @@
 from rest_framework.generics import DestroyAPIView
-from serializers import AddressSerializer
+from customer.models import Address
+from customer.serializers import AddressSerializer
 
 
 class DeleteAPIAddress(DestroyAPIView):
     serializer_class = AddressSerializer
-    lookup_url_kwarg = None
+
+    def get_queryset(self):
+
+        address_id = self.request.data['the_id']
+        query = Address.objects.get(id=address_id)
+        return query
+
+    def perform_destroy(self, instance):
+        self.get_queryset().delete()

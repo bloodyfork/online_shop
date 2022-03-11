@@ -1,5 +1,5 @@
 from django.urls import path
-from API import DeleteAPIAddress
+from customer.API import DeleteAPIAddress
 from customer.views import Login, Register, logout_user, ViewProfile
 
 urlpatterns = [
@@ -10,6 +10,6 @@ urlpatterns = [
     # API
     # API
     # API
-    path('DeleteAddress/<int: pk>', DeleteAPIAddress.as_view(), name='DeleteAddress')
+    path('DeleteAddress/<int:pk>', DeleteAPIAddress.as_view(), name='DeleteAddress')
 
 ]
