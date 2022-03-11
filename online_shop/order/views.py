@@ -1,6 +1,5 @@
+from django.views.generic import TemplateView
 from django.shortcuts import render
-
-from customer.models import Customer
 from order.models import Cart
 
 

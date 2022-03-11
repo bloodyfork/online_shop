@@ -59,16 +59,14 @@ def view_profile(request):
     context = {'data': data}
     return render(request, 'Customer/View_profile.html', context)
 
-# class ViewProfile(ListView):
+
+# class ViewProfile(ListView, LoginRequiredMixin):
 #     model = Address
 #     template_name = 'Customer/view_profile.html'
 #     context_object_name = 'addresses'
 #
-#     def get(self, request, *args, **kwargs):
-#         query = Address.objects.filter(customer__user=request.user)
+#
+#     def get_queryset(self):
+#         query = Address.objects.filter(customer__user=self.request.user)
 #         return query
-
-    # def get_queryset(self):
-    #     query = Address.objects.filter(customer__user=)
-    #     return query
 

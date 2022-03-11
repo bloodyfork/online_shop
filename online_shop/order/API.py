@@ -1,13 +1,15 @@
 from django.contrib import messages
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from .serializers import *
 from product.models import Product
 from customer.models import Customer
 from order.models import Cart
 from rest_framework.response import Response
 from django.shortcuts import HttpResponse
-# import json
-# from django.shortcuts import redirect
+from rest_framework import permissions
+
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class AddToCart(generics.CreateAPIView):

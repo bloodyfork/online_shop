@@ -18,7 +18,7 @@
 
         <div class="box-element">
 
-                 <a href="{% url 'logout' %} " class="btn btn-dark" style="margin-right: 10px; color: whitesmoke; background-color: #C00101FF; float: right">Logout</a>
+                 <a href="{% url 'logout' %} " class="btn btn-danger" style="margin-right: 10px; color: whitesmoke;  float: right">Logout</a>
 
             <br>
             <br>
@@ -35,14 +35,38 @@
     </div>
 </div>
 
-<div class="row">
 
-     <div class="box-element product col-lg-12">
 
-         {% for A in data %}
 
-         {% endfor %}
+
+
+<div class="box-element mt-2 col-lg-12">
+            {% for A in data %}
+                <div class="box-element mt-1">
+                    <div class="cart-row">
+
+                        <div style="flex:3"><strong>Province</strong></div>
+                        <div style="flex:2"><strong>City</strong></div>
+                        <div style="flex:5"><strong>Zip-Code</strong></div>
+
+                    </div>
+
+                    <div class="cart-row">
+
+                        <div style="flex:3">{{ A.province }}</div>
+                        <div class="mr-3" style="flex:2">{{A.city}}</div>
+                        <div class="mr-4" style="flex:3">{{ A.postal_code }}</div>
+
+                        <button class="centered btn btn-info col-lg-1 mr-1">Edit</button>
+                        <button class="centered btn btn-danger col-lg-1">Delete</button>
+                    </div>
+
+                </div>
+
+
+            {% endfor %}
          <button class="centered btn btn-info col-lg-12">Add Address</button>
-     </div>
+
 </div>
+
 {% endblock %}
