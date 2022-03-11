@@ -42,7 +42,7 @@
 
 <div class="box-element mt-2 col-lg-12">
             {% for A in addresses %}
-                <div data-id="{{ A.id }}" class="box-element mt-2 AddressBar">
+                <div id="address{{ A.id }}"  class="box-element mt-2 AddressBar">
                     <div class="cart-row">
 
                         <div style="flex:3"><strong>Province</strong></div>
@@ -57,8 +57,8 @@
                         <div class="mr-3" style="flex:2">{{A.city}}</div>
                         <div class="mr-4" style="flex:3">{{ A.postal_code }}</div>
 
-                        <button class="centered btn btn-info col-lg-1 mr-1">Edit</button>
-                        <button data-action="DeleteAddress" onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
+                        <a class="centered btn btn-info col-lg-1 mr-1" href="{% url 'UpdateAddress' pk=A.id %}">Edit</a>
+                        <button  onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
                     </div>
 
                 </div>
@@ -70,22 +70,22 @@
 </div>
 
     <script>
+
     function DeleteAddress(value){
 
         $.ajax({
             url: "{% url 'DeleteAddress' pk=0 %}".replace(/0/, value),
-            {#url: "{% url 'DeleteAddress'  %}",#}
             method: 'DELETE',
             headers: {
                 'X-CSRFToken': '{{ csrf_token }}'
             },
 
             success: function () {
-                 let r = $("[data-id=value]");
-                 console.log(r)
+                 let x = document.getElementById(`address${value}`)
+                 x.remove()
+
             },
         })
-
     }
 
 

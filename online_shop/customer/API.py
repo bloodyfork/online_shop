@@ -1,10 +1,14 @@
-from rest_framework.generics import DestroyAPIView
+from rest_framework.generics import DestroyAPIView, UpdateAPIView
 from customer.models import Address
 from customer.serializers import AddressSerializer
-from order.models import OrderItem
 
 
 class DeleteAPIAddress(DestroyAPIView):
     serializer_class = AddressSerializer
     queryset = Address
 
+
+class UpdateAPIAddress(UpdateAPIView):
+    serializer_class = AddressSerializer
+    queryset = Address
+    lookup_field = 'pk'
