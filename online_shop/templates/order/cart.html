@@ -47,7 +47,7 @@
                         <div style="flex:1">
                             <p class="count-of-item" id="how_many">{{ item.how_many }}</p>
                             <div class="count-of-item">
-                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action=""  id="up" onclick="Increaser(this.value)"><i
+                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action="increase"  id="up" onclick="quantityHandler(this.value)"><i
                                         class="fa fa-angle-up" style="font-size:24px"></i></button>
                                 <button value="{{ item.id }}" class=" btn btn-outline-secondary " id="down" onclick="Decreaser(this.value)"><i
                                         class="fa fa-angle-down" style="font-size:24px"></i></button>
@@ -62,7 +62,7 @@
     </div>
 
     <script>
-    function Increaser(value){
+    function quantityHandler(value){
 
         $.ajax({
             url: "{% url 'IncAndDec' pk=12345 %}".replace(/12345/, value),
