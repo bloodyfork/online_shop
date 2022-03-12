@@ -47,9 +47,9 @@
                         <div style="flex:1">
                             <p class="count-of-item" id="how_many">{{ item.how_many }}</p>
                             <div class="count-of-item">
-                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action="increase"  id="up" onclick="quantityHandler(this.value)"><i
+                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action="increase"  id="up" onclick="quantityHandler(this.value, this.action)"><i
                                         class="fa fa-angle-up" style="font-size:24px"></i></button>
-                                <button value="{{ item.id }}" class=" btn btn-outline-secondary " id="down" onclick="Decreaser(this.value)"><i
+                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action="decrease" id="down" onclick="Decreaser(this.value, this.action)"><i
                                         class="fa fa-angle-down" style="font-size:24px"></i></button>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
     </div>
 
     <script>
-    function quantityHandler(value){
+    function quantityHandler(value, action){
 
         $.ajax({
             url: "{% url 'IncAndDec' pk=12345 %}".replace(/12345/, value),
@@ -72,6 +72,7 @@
             },
             data: {
                 'how_many' : Number($('#how_many')),
+                'action': action,
                 'item_id' : value
             },
             success: function (success) {
