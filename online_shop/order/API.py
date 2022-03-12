@@ -48,19 +48,25 @@ class OrderItemUpdateView(generics.UpdateAPIView):
     serializer_class = OrderItemSerializer
     queryset = OrderItem
 
-    # def get_queryset(self):
-    #     item_id = self.request.data['item_id']
-    #     query = OrderItem.objects.get(id=item_id)
-    #     return query
-
     def partial_update(self, request, *args, **kwargs):
         data = request.data
         item = OrderItem.objects.get(id=data['item_id'])
-        if item.product.number_in_inventory >= item.how_many +1:
-            item.how_many += 1
+        if data['action'] == 'increase':
+
+            if item.product.number_in_inventory >= item.how_many + 1:
+                item.how_many += 1
+                item.save()
+                serializer = OrderItemSerializer(item)
+                return Response(serializer.data)
+            else:
+                messages.info(request, "No more of this product is in in inventory")
+                return Response('s')
+
+        elif data['action'] == 'decrease':
+            item.how_many -= 1
             item.save()
             serializer = OrderItemSerializer(item)
             return Response(serializer.data)
+
         else:
-            messages.info(request, "No more of this product is in in inventory")
-            return Response('s')
+            return HttpResponse('Request not found')
