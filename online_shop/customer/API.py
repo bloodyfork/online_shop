@@ -31,4 +31,5 @@ class CreateAPIAddress(CreateAPIView):
                                        customer=customer)
         query.save()
         # m = messages.info(request, 'Address has been successfully created')
+        # ToDo make the message apear without reload
         return HttpResponse('m')

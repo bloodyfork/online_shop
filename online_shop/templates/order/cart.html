@@ -47,7 +47,7 @@
                         <div style="flex:1">
                             <p class="count-of-item" id="how_many">{{ item.how_many }}</p>
                             <div class="count-of-item">
-                                <button value="{{ item.id }}" class=" btn btn-outline-secondary "  id="up" onclick="Increaser(this.value)"><i
+                                <button value="{{ item.id }}" class=" btn btn-outline-secondary" data-action=""  id="up" onclick="Increaser(this.value)"><i
                                         class="fa fa-angle-up" style="font-size:24px"></i></button>
                                 <button value="{{ item.id }}" class=" btn btn-outline-secondary " id="down" onclick="Decreaser(this.value)"><i
                                         class="fa fa-angle-down" style="font-size:24px"></i></button>
@@ -71,7 +71,8 @@
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             data: {
-                how_many : Number($('#how_many')) + 1
+                'how_many' : Number($('#how_many')),
+                'item_id' : value
             },
             success: function (success) {
                 {#$(`#order_item_price_${id}`).html(success.formatted_price)#}
