@@ -199,10 +199,10 @@
          <script>
 
             function UpdateAddress(value){
-                {#let province = $('#P').val()#}
-                {#let city = $('#C').val()#}
-                {#let exact = $('#E').val()#}
-                {#let zip = $('#Z').val()#}
+                let province = $(`#P${value}`).val()
+                let city = $(`#C${value}`).val()
+                let exact = $(`#E${value}`).val()
+                let zip = $(`#Z${value}`).val()
 
                 $.ajax({
                     url: "{% url 'UpdateAddress' pk=0 %}".replace(/0/, value),
@@ -215,6 +215,7 @@
                         'city': city,
                         'zip': zip,
                         'exact_address': exact,
+                        'address_id': value
                     },
 
                     success: function () {

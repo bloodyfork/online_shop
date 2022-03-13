@@ -63,8 +63,3 @@ class ViewProfile(ListView, LoginRequiredMixin):
         return query
 
 
-# @login_required(login_url='login')
-# def view_profile(request):
-#     data = Address.objects.filter(customer__user=request.user)
-#     context = {'data': data}
-#     return render(request, 'Customer/View_profile.html', context)
