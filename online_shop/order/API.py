@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from django.shortcuts import HttpResponse
 
 
+# API for OrderItems Create Update Delete
 class AddToCart(generics.CreateAPIView):
     serializer_class = OrderItemSerializer
 
@@ -75,3 +76,10 @@ class OrderItemUpdateView(generics.UpdateAPIView):
 
         else:
             return HttpResponse('Request not found')
+
+
+# API for cart Update
+class CartAddressUpdateView(generics.UpdateAPIView):
+    pass
+
+
