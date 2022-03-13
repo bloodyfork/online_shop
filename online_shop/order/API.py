@@ -80,6 +80,7 @@ class OrderItemUpdateView(generics.UpdateAPIView):
 
 # API for cart Update
 class CartAddressUpdateView(generics.UpdateAPIView):
-    pass
+    serializer_class = ...
+    queryset = Cart
 
 
