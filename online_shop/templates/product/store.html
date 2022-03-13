@@ -3,7 +3,7 @@
 {% block content %}
 
  {% for message in messages %}
-     <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">
+     <div style="background-color: gray" id="store-message" class=" sticky rounded mt-5 p-1 centered">
          <h6 style="color: snow; ">{{ message }}</h6>
      </div>
  {% endfor %}
@@ -162,6 +162,12 @@
         </script>
 
 <script src="{% static 'js/cart.js' %}"></script>
+
+ <script>
+        x = $('#store-message')
+        x.fadeOut(2800)
+    </script>
+
 
 
 {#<script>#}

@@ -51,6 +51,7 @@ class OrderItemUpdateView(generics.UpdateAPIView):
     def partial_update(self, request, *args, **kwargs):
         data = request.data
         item = OrderItem.objects.get(id=data['item_id'])
+
         if data['action'] == 'increase':
 
             if item.product.number_in_inventory >= item.how_many + 1:
@@ -63,10 +64,14 @@ class OrderItemUpdateView(generics.UpdateAPIView):
                 return Response('s')
 
         elif data['action'] == 'decrease':
-            item.how_many -= 1
-            item.save()
-            serializer = OrderItemSerializer(item)
-            return Response(serializer.data)
+            if item.how_many - 1 != 0:
+                item.how_many -= 1
+                item.save()
+                serializer = OrderItemSerializer(item)
+                return Response(serializer.data)
+            else:
+                item.delete()
+                return HttpResponse('Request not found')
 
         else:
             return HttpResponse('Request not found')
