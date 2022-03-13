@@ -26,7 +26,11 @@
             <span class="close">&times;</span>
 
             <div class="row"></div>
+            <div>
+                <h1 class="centered">Choose Address</h1>
+            </div>
             {% for A in addresses  %}
+
                 <button class="btn" onclick="updateCartAddress({{ cart.id }}, {{ A.id }})">
                    <div id="address{{ A.id }}"  class="box-element mt-2 AddressBar">
                         <div class="cart-row">
@@ -50,10 +54,7 @@
                         </div>
                 </button>
             {% endfor %}
-
-
-                <input class="btn btn-success col-lg-12" onclick="" type="submit" value="Go to payment">
-
+         <button id="myBtn" class="centered btn btn-info col-lg-12">Add New Address</button>
         </div>
 </div>
                 <br>

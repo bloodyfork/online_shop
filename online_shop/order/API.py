@@ -80,7 +80,15 @@ class OrderItemUpdateView(generics.UpdateAPIView):
 
 # API for cart Update
 class CartAddressUpdateView(generics.UpdateAPIView):
-    serializer_class = ...
+    serializer_class = CartSerializer
     queryset = Cart
 
+    def partial_update(self, request, *args, **kwargs):
+        customer = request.user.customer
+        address_id = request.data['address']
+        the_cart = customer.cart_set.get(is_paid=False)
+        the_address = customer.address_set.get(id=address_id)
+        print(the_cart)
+        print(the_address)
+        return HttpResponse('Request not found')
 

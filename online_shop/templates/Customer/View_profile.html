@@ -64,88 +64,85 @@
                         <div class="mr-4 showing-zip" style="flex:3">{{ A.postal_code }}</div>
 
 
-                        <button type="button" class="centered btn btn-info col-lg-1 mr-1" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
-                        <button  onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
-                    </div>
 
-                </div>
 
-            {% endfor %}
-    <!-- The Modal -->
-        <div id="myModal" class="modal  mt-5 col-lg-12" >
+                         <!-- Edit Address Modal -->
+                <div id="EditAddressModal{{ A.id }}" class="modal  mt-5 col-lg-12" >
 
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <form>
+                <!-- Modal content -->
+                    <div class="modal-content centered">
 
-                    <label for="Province">Province:</label>
-                    <input style="flex:1" type="text" id="Province" >
+                        <form>
+
+                            <label for="P{{ A.id }}">Province:</label><br>
+                            <input style="flex:1" type="text" id="P{{ A.id }}" class="col-lg-6  rounded" value="{{ A.province }}"><br>
 
 
 
-                    <label for="City">City:</label>
-                    <input style="flex:1" type="text" id="City">
+                            <label for="C{{ A.id }}">City:</label><br>
+                            <input style="flex:1" type="text" id="C{{ A.id }}" class="col-lg-6 rounded" value="{{ A.city }}"><br>
 
 
 
-                    <label for="Exact">Exact Address:</label>
-                    <input style="flex:1" type="text" id="Exact" >
+                            <label for="E{{ A.id }}">Exact Address:</label><br>
+                            <input style="flex:1" type="text" id="E{{ A.id }}" class="col-lg-6 rounded" value="{{ A.exact_address }}"><br>
 
 
 
-                    <label for="Zip">Postal Code:</label>
-                    <input style="flex:1" type="number" id="Zip">
+                            <label for="Z{{ A.id }}">Postal Code:</label><br>
+                            <input style="flex:1" type="number" id="Z{{ A.id }}" class="col-lg-6 rounded"  value="{{ A.postal_code }}"><br>
 
-                <input class="btn btn-success" onclick="CreateAddress()" type="submit" value="Submit">
+                <input class="btn btn-success mt-5 col-lg-4" onclick="UpdateAddress({{ A.id }})" type="submit" value="Submit">
             </form>
         </div>
 </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Edit Address</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-
-            <label for="P">Province:</label><br>
-            <input style="flex:1" type="text" id="P" ><br>
 
 
+                        <button type="button" class="centered btn btn-info col-lg-1 mr-1" id="EditAddressBtn{{ A.id }}" onclick="EditAddress({{ A.id }})">Edit</button>
+                        <button  onclick="DeleteAddress({{ A.id }})" class="centered btn btn-danger col-lg-1">Delete</button>
+                    </div>
 
-            <label for="C">City:</label><br>
-            <input style="flex:1" type="text" id="C"><br>
+                </div>
 
 
+{% endfor %}
+    <!-- Add Address Modal -->
+        <div id="myModal" class="modal  mt-5 col-lg-12" >
 
-            <label for="E">Exact Address:</label><br>
-            <input style="flex:1" type="text" id="E" ><br>
+        <!-- Modal content -->
+        <div class="modal-content centered">
+            <span class="close" style="margin-right: 1500px">&times;</span>
+            <form>
+
+                    <label for="Province">Province:</label><br>
+                    <input style="flex:1" type="text" id="Province" class="col-lg-6  rounded"><br>
 
 
 
-            <label for="Z">Postal Code:</label><br>
-            <input style="flex:1" type="number" id="Z"><br>
+                    <label for="City">City:</label><br>
+                    <input style="flex:1" type="text" id="City" class="col-lg-6 rounded"><br>
 
-            <div class="modal-footer">
-                <input class="btn btn-success" onclick="UpdateAddress({{ A.id }})" type="submit" value="Submit">
-            </div>
-        </form>
 
-      </div>
 
-    </div>
-  </div>
+                    <label for="Exact">Exact Address:</label><br>
+                    <input style="flex:1" type="text" id="Exact" class="col-lg-6 rounded"><br>
+
+
+
+                    <label for="Zip">Postal Code:</label><br>
+                    <input style="flex:1" type="number" id="Zip" class="col-lg-6 rounded"><br>
+
+                <input class="btn btn-success mt-5 col-lg-4" onclick="CreateAddress()" type="submit" value="Submit">
+            </form>
+        </div>
 </div>
 
-         <button id="myBtn" class="centered btn btn-info col-lg-12">Add Address</button>
+
+
+
+         <button id="myBtn" class="centered btn btn-info col-lg-12">Add New Address</button>
 
 </div>
 
@@ -258,6 +255,34 @@
     </script>
 
 
+<script>
+        // Get the modal
+        function EditAddress(i)
+        {
 
 
+            var modal = document.getElementById(`EditAddressModal${i}`);
+
+// Get the button that opens the modal
+            var btn = document.getElementById(`EditAddressBtn${i}`);
+
+// Get the <span> element that closes the modal
+            var span = document.getElementById(`close${i}`);
+            console.log(span)
+
+// When the user clicks on the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+        }
+
+
+// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
 {% endblock %}
