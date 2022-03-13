@@ -168,36 +168,4 @@
         x.fadeOut(2800)
     </script>
 
-
-
-{#<script>#}
-{#      let AddToCart = document.getElementsByClassName('cart-update')#}
-{#      for( let i=0; i<AddToCart.length; i++){#}
-{##}
-{#         AddToCart[i].addEventListener('click', function () {#}
-{##}
-{#             PlaceHolder = document.getElementById("message")#}
-{##}
-{##}
-{##}
-{#             {% for message in messages %}#}
-{##}
-{##}
-{##}
-{#                PlaceHolder.innerHTML +=` <div style="background-color: gray" class=" sticky rounded mt-2 p-1 centered" id="close">#}
-{#                                                <h6 style="color: snow; ">{{ message }}</h6>#}
-{#                                            </div>`#}
-{##}
-{#             {% endfor %}#}
-{##}
-{#         setTimeout(#}
-{#             function c() {#}
-{#                let elem = document.getElementById("message")#}
-{#                elem.parentNode.removeChild(elem)},#}
-{##}
-{#             6000)#}
-{##}
-{#         })#}
-{##}
-{#</script>#}
 {% endblock %}
