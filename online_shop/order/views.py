@@ -1,5 +1,5 @@
-from django.views.generic import TemplateView
 from django.shortcuts import render
+from customer.models import Address
 from order.models import Cart
 
 
@@ -8,8 +8,9 @@ def cart(request):
         customer = request.user.customer
         cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
         items = cart.orderitem_set.all()
-
-        context = {"items": items, "cart": cart}
+        customer = request.user.customer
+        addresses = customer.address_set.all()
+        context = {"items": items, "cart": cart, 'addresses': addresses}
 
     else:
         # ToDO make it for not registered users#
