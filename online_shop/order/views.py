@@ -8,6 +8,7 @@ def cart(request):
         customer = request.user.customer
         cart, created = Cart.objects.get_or_create(customer=customer, is_paid=False)
         items = cart.orderitem_set.all()
+
         context = {"items": items, "cart": cart}
 
     else:

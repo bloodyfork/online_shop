@@ -17,6 +17,22 @@
                     <input class="btn btn-outline-success" id="OffCode-submit" type="submit">
                 </div>
 
+
+                 <!-- The Modal -->
+        <div id="checkoutModal" class="modal  mt-5 col-lg-12" >
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div class="row"></div>
+            dvsdvsdvdsv
+
+
+                <input class="btn btn-success col-lg-12" onclick="" type="submit" value="Go to payment">
+
+        </div>
+</div>
                 <br>
                 <br>
 
@@ -26,7 +42,7 @@
                         <th><h5>Total price: <strong id="total-price">${{ cart.calculate_total_price }}</strong></h5></th>
                         <th><h5>Final price: <strong id="final-price">${{ cart.calculate_final_price }}</strong></h5></th>
                         <th>
-                            <a style="float: right; margin: 5px" class="btn btn-success" href="#">Checkout</a>
+                            <a style="float: right; margin: 5px" class="btn btn-success" id="checkoutModalbtn">Checkout</a>
                         </th>
                     </tr>
                 </table>
@@ -99,6 +115,35 @@
  <script>
         x = $('#cart-message')
         x.fadeOut(2800)
+    </script>
+
+
+ <script>
+        // Get the modal
+        var modal = document.getElementById('checkoutModal');
+
+// Get the button that opens the modal
+        var btn = document.getElementById('checkoutModalbtn');
+
+// Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+// When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        }
     </script>
 
 
