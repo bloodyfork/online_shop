@@ -1,4 +1,6 @@
+from django.contrib import messages
 from django.http import HttpResponse
+
 from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView
 from rest_framework.response import Response
 from customer.models import Address
@@ -16,18 +18,25 @@ class UpdateAPIAddress(UpdateAPIView):
     lookup_field = 'pk'
 
     def partial_update(self, request, *args, **kwargs):
-        customer = request.user.customer
         data = request.data
-        address = customer.address_set.get(id=data['address_id'])
-        address.exact_address = data['exact_address']
-        address.province = data['province']
-        address.city = data['city']
-        address.postal_code = data['zip']
-        address.save()
-        serializer = AddressSerializer(address)
-        return Response(serializer.data)
+        if data['exact_address'] is not '' and\
+                data['city'] is not '' and \
+                data['province'] is not '' and \
+                data['zip'] is not None:
 
-
+            customer = request.user.customer
+            data = request.data
+            address = customer.address_set.get(id=data['address_id'])
+            address.exact_address = data['exact_address']
+            address.province = data['province']
+            address.city = data['city']
+            address.postal_code = data['zip']
+            address.save()
+            serializer = AddressSerializer(address)
+            return Response(serializer.data)
+        else:
+            messages.info(request, 'Address fields can\'t be empty')
+            return HttpResponse('m')
 
 
 class CreateAPIAddress(CreateAPIView):

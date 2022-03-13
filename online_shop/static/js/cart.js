@@ -46,6 +46,7 @@ function UpdateUserOrder(ProductId, action, MyUrl, token){
         .then((response) =>{
              window.location.reload();
             return response.json();
+        //   ToDo STOP THE RELOAD
         })
 
 

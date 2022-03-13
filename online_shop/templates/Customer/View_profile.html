@@ -3,11 +3,11 @@
 
 {% block content %}
 
-{#    {% for message in messages %}#}
-{#        <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">#}
-{#            <h6 style="color: snow; ">{{ message }}</h6>#}
-{#        </div>#}
-{#    {% endfor %}#}
+    {% for message in messages %}
+        <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">
+            <h6 style="color: snow; ">{{ message }}</h6>
+        </div>
+    {% endfor %}
     <div class="row">
 
     <div class="box-element product col-lg-8">
@@ -219,6 +219,8 @@
                     },
 
                     success: function () {
+                        window.location.reload()
+                    {#  todo STOP THE RELOAD  #}
 
 
                     },
