@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from customer.models import Address
 from order.models import Cart
 
 

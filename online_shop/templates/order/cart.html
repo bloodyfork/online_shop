@@ -27,28 +27,28 @@
 
             <div class="row"></div>
             {% for A in addresses  %}
-               <div id="address{{ A.id }}"  class="box-element mt-2 AddressBar">
-                    <div class="cart-row">
+                <button class="btn" onclick="updateCartAddress({{ cart.id }}, {{ A.id }})">
+                   <div id="address{{ A.id }}"  class="box-element mt-2 AddressBar">
+                        <div class="cart-row">
 
-                        <div style="flex:1"><strong>Province</strong></div>
-                        <div style="flex:1"><strong>City</strong></div>
-                        <div style="flex:1"><strong>Zip-Code</strong></div>
-                        <div style="flex:1"><strong>Exact Address</strong></div>
+                            <div style="flex:1"><strong>Province</strong></div>
+                            <div style="flex:1"><strong>City</strong></div>
+                            <div style="flex:1"><strong>Zip-Code</strong></div>
+                            <div style="flex:1"><strong>Exact Address</strong></div>
 
-                    </div>
+                        </div>
 
-                    <div class="cart-row">
+                        <div class="cart-row">
 
-                        <div class="showing-province" style="flex:1">{{ A.province }}</div>
-                        <div class="mr-3 showing-city ml-5" style="flex:1">{{A.city}}</div>
-                        <div class="mr-4 showing-zip ml-5" style="flex:1">{{ A.postal_code }}</div>
-                        <div class="mr-4 showing-zip ml-5" style="flex:1">{{ A.exact_address}}</div>
+                            <div class="showing-province" style="flex:1">{{ A.province }}</div>
+                            <div class="mr-3 showing-city ml-5" style="flex:1">{{A.city}}</div>
+                            <div class="mr-4 showing-zip ml-5" style="flex:1">{{ A.postal_code }}</div>
+                            <div class="mr-4 showing-zip ml-5" style="flex:1">{{ A.exact_address}}</div>
+                        </div>
 
 
-
-                    </div>
-
-                </div>
+                        </div>
+                </button>
             {% endfor %}
 
 
@@ -168,6 +168,32 @@
         }
         }
     </script>
+
+
+<script>
+
+function updateCartAddress(cart_value, address_value){
+
+
+                $.ajax({
+                    url: "{% url 'UpdateCartAddress' pk=0 %}".replace(/0/, cart_value),
+                    method: 'PATCH',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                 },
+                    data: {
+                        'address': address_value
+                    },
+
+                    success: function () {
+
+
+                    },
+                })
+
+            }
+
+</script>
 
 
 {% endblock %}

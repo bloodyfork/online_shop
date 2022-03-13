@@ -1,7 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from core.models import BaseModel
-from customer.models import Customer
+from customer.models import Customer, Address
 from product.models import Product
 
 
@@ -12,6 +12,7 @@ class Cart(BaseModel):
     total_price = models.PositiveIntegerField(help_text="Total Price", default=0)
     final_price = models.PositiveIntegerField(help_text="Final Price", default=0)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.SET_NULL, default=None, null=True)
     off_code = models.OneToOneField("OffCode", on_delete=models.CASCADE, null=True, blank=True)
     is_paid = models.BooleanField(default=False)
 
