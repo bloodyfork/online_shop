@@ -111,6 +111,7 @@ class CheckoutAPIView(generics.UpdateAPIView):
             for o in order_items:
                 productz = o.product
                 productz.number_in_inventory -= o.how_many
+                productz.in_stock = False
                 productz.save()
 
             serializer = CartSerializer(the_cart)

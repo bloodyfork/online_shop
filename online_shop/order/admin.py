@@ -11,7 +11,8 @@ class OrderItemShow(admin.ModelAdmin):
     list_display = ['product', 'how_many', 'cart']
 
 
-
+class OffCodeShow(admin.ModelAdmin):
+    list_display = ['the_code', 'is_active', 'how_many_use']
 
 
 admin.site.register(Cart, CartShow)
