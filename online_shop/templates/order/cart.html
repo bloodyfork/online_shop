@@ -90,7 +90,7 @@
             {% endfor %}
 
 
-         <button id="AddCheck" class="btn btn-success col-lg-12" onclick="">Checkout</button>
+         <button id="AddCheck" class="btn btn-success col-lg-12" onclick="Checkout({{ cart.id }})">Checkout</button>
 
         </div>
 </div>
@@ -233,6 +233,36 @@ function updateCartAddress(cart_value, address_value){
 
                         x = $('.modal_message')
                         x.fadeOut(2000)
+
+
+
+
+                    },
+                })
+
+            }
+
+</script>
+
+
+<script>
+
+function Checkout(cart_value){
+
+
+                $.ajax({
+                    url: "{% url 'Checkout' %}",
+                    method: 'PATCH',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                 },
+                    data: {
+                        'cart_id': cart_value
+
+                    },
+
+                    success: function () {
+
 
 
 
