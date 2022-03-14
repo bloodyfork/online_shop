@@ -12,6 +12,7 @@ urlpatterns = [
     path('AddToCart/', AddToCart.as_view(), name='AddToCart'),
     path('Update/<int:pk>', OrderItemUpdateView.as_view(), name='IncAndDec'),
     path('UpdateCartAddress/<int:pk>', CartAddressUpdateView.as_view(), name='UpdateCartAddress'),
+    path('Checkout/', CheckoutAPIView.as_view(), name='Checkout'),
 
 
 ]
