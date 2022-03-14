@@ -4,11 +4,14 @@ from .models import *
 
 
 class CartShow(admin.ModelAdmin):
-    list_display = ['customer']
+    list_display = ['customer', 'total_price', 'final_price', 'is_paid']
 
 
 class OrderItemShow(admin.ModelAdmin):
     list_display = ['product', 'how_many', 'cart']
+
+
+
 
 
 admin.site.register(Cart, CartShow)

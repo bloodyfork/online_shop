@@ -61,7 +61,7 @@
             <div>
                 <h1 class="centered">Choose Address</h1>
             </div>
-            <button id="AddAddress" class=" ml-4 btn btn-info col-lg-2">Add New Address</button>
+            <button id="AddAddress" class="btn btn-info col-lg-2">Add New Address</button>
             <div id="modal-message"></div>
             {% for A in addresses  %}
 
@@ -262,6 +262,7 @@ function Checkout(cart_value){
                     },
 
                     success: function () {
+                        window.location.replace("http://127.0.0.1:8000/order/cart/");
 
 
 

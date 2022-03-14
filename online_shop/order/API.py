@@ -6,7 +6,7 @@ from product.models import Product
 from customer.models import Customer
 from order.models import Cart
 from rest_framework.response import Response
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, redirect
 
 
 # API for OrderItems Create Update Delete
@@ -94,4 +94,31 @@ class CartAddressUpdateView(generics.UpdateAPIView, LoginRequiredMixin):
         serializer = CartSerializer(the_cart)
         return Response(serializer.data)
 
+
+class CheckoutAPIView(generics.UpdateAPIView):
+    serializer_class = CartSerializer
+    queryset = Cart
+
+    def partial_update(self, request, *args, **kwargs):
+        customer = request.user.customer
+        cart_id = request.data['cart_id']
+        the_cart = customer.cart_set.get(id=cart_id)
+        order_items = the_cart.orderitem_set.all()
+
+        if the_cart.address is not None:
+            the_cart.is_paid = True
+            the_cart.save()
+            for o in order_items:
+                productz = o.product
+                productz.number_in_inventory -= o.how_many
+                productz.save()
+
+            serializer = CartSerializer(the_cart)
+            messages.info(request, 'Order Successfully paid')
+            return Response(serializer.data)
+
+        else:
+            messages.info(request, 'You should choose an address')
+            serializer = CartSerializer(the_cart)
+            return Response(serializer.data)
 
