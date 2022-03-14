@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics
 from .serializers import *
 from product.models import Product
@@ -79,7 +80,7 @@ class OrderItemUpdateView(generics.UpdateAPIView):
 
 
 # API for cart Update
-class CartAddressUpdateView(generics.UpdateAPIView):
+class CartAddressUpdateView(generics.UpdateAPIView, LoginRequiredMixin):
     serializer_class = CartSerializer
     queryset = Cart
 
@@ -88,7 +89,8 @@ class CartAddressUpdateView(generics.UpdateAPIView):
         address_id = request.data['address']
         the_cart = customer.cart_set.get(is_paid=False)
         the_address = customer.address_set.get(id=address_id)
-        print(the_cart)
-        print(the_address)
-        return HttpResponse('Request not found')
+        the_cart.address = the_address
+        the_cart.save()
+        serializer = CartSerializer(the_cart)
+        return Response(serializer.data)
 

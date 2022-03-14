@@ -22,7 +22,7 @@ class UpdateAPIAddress(UpdateAPIView):
         if data['exact_address'] is not '' and\
                 data['city'] is not '' and \
                 data['province'] is not '' and \
-                data['zip'] is not None:
+                data['zip'] is not '':
 
             customer = request.user.customer
             data = request.data

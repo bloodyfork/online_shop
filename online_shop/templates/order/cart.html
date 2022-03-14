@@ -26,9 +26,43 @@
             <span class="close">&times;</span>
 
             <div class="row"></div>
+
+        <div>
+            <h1 class="centered">Order Summary</h1>
+        </div>
+
+            {% for item in items %}
+                <div class="box-element mt-3">
+                    <div class="cart-row">
+                        <div style="flex:2"></div>
+                        <div style="flex:2"><strong>Item</strong></div>
+                        <div style="flex:1"><strong>Price</strong></div>
+                        <div style="flex:1"><strong>Quantity</strong></div>
+                        <div style="flex:1"><strong>Total</strong></div>
+                    </div>
+
+                    <div class="cart-row">
+                        <div style="flex:2">
+                            <image src="{{ item.product.image.url }}" class="row-image"></image>
+                        </div>
+                        <div style="flex:2">{{ item.product.name }}</div>
+                        <div style="flex:1">${{ item.product.price| floatformat }}</div>
+                        <div style="flex:1">
+                            <p class="count-of-item" id="how_many{{ item.id }}">{{ item.how_many }}</p>
+
+                        </div>
+                        <div style="flex:1">${{ item.sum_of_prices_after_discount }}</div>
+                    </div>
+
+                </div>
+            {% endfor %}
+
+
             <div>
                 <h1 class="centered">Choose Address</h1>
             </div>
+            <button id="AddAddress" class=" ml-4 btn btn-info col-lg-2">Add New Address</button>
+            <div id="modal-message"></div>
             {% for A in addresses  %}
 
                 <button class="btn" onclick="updateCartAddress({{ cart.id }}, {{ A.id }})">
@@ -54,7 +88,10 @@
                         </div>
                 </button>
             {% endfor %}
-         <button id="myBtn" class="centered btn btn-info col-lg-12">Add New Address</button>
+
+
+         <button id="AddCheck" class="btn btn-success col-lg-12" onclick="">Checkout</button>
+
         </div>
 </div>
                 <br>
@@ -140,8 +177,7 @@
  <script>
         x = $('#cart-message')
         x.fadeOut(2800)
-    </script>
-
+ </script>
 
  <script>
         // Get the modal
@@ -188,6 +224,17 @@ function updateCartAddress(cart_value, address_value){
                     },
 
                     success: function () {
+                        let modal_message = document.getElementById('modal-message')
+                        let message = `<div style="background-color: gray" id="modalMessage" class="modal_message sticky rounded mt-5 p-1 centered one-time-message">
+                                                        <h6 style="color: snow; ">Successfully Updated Cart Address</h6>
+                                                    </div>`
+
+                        modal_message.innerHTML += message
+
+                        x = $('.modal_message')
+                        x.fadeOut(2000)
+
+
 
 
                     },

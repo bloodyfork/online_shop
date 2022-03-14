@@ -4,7 +4,7 @@
 {% block content %}
 
     {% for message in messages %}
-        <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered">
+        <div style="background-color: gray" class=" sticky rounded mt-5 p-1 centered" id="ViewProfile-message">
             <h6 style="color: snow; ">{{ message }}</h6>
         </div>
     {% endfor %}
@@ -287,5 +287,11 @@
             }
         }
 
+    </script>
+
+
+<script>
+        x = $('#ViewProfile-message')
+        x.fadeOut(3000)
     </script>
 {% endblock %}
