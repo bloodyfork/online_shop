@@ -41,24 +41,42 @@
 
 
         function product_list(){
-            var wrapper = document.getElementById('API-caller')
-            var  url = document.getElementById('API-caller').getAttribute('data-url')
+            let wrapper = document.getElementById('API-caller')
+            let  url = document.getElementById('API-caller').getAttribute('data-url')
             fetch(url)
             .then((resp) => resp.json())
+
             .then(
-                function (data){
 
-                    var  product = data
-                    for (var i of product){
+                function (product){
 
-                        var PK = i.id
+                    for (let i of product){
 
-                        if(
-                            i['image'] != null && i['in_stock'] === true
-                        ){
+                        let PK = i.id
+                        function StockPart () {
 
-                            var item = `
+                            if (i['in_stock'] === true) {
 
+                                let s = `
+                                 <h6 style="color: #008000FF"><strong>In Stock</strong></h6>
+                                  <hr>
+                                 <button data-product="${PK}" data-url="{% url 'AddToCart' %}" data-action="add" data-product-name=${i['name']} data-c ="{{ csrf_token }}" class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
+                                `
+                                return s
+
+                            } else if (i['in_stock'] === false) {
+
+                                let s =
+                                    `
+                                    <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
+                                    <hr>
+                                    <button class="btn btn-outline-danger" style="color: #c00101">Add to Cart</button>
+                                    `
+                                return s
+                            }
+                        }
+
+                        let item = `
 
                            <div class="col-lg-4">
                               <img class="i" alt='1' src="${i['image']}">
@@ -66,99 +84,20 @@
                               <div class="box-element product">
 
                                   <h6><strong>${ i.name }</strong></h6>
-                                  <h6 style="color: #008000FF"><strong>In Stock</strong></h6>
-                                  <hr>
-                                   <button data-product="${PK}" data-url="{% url 'AddToCart' %}" data-action="add" data-product-name=${i['name']} data-c ="{{ csrf_token }}" class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
+                                  ${StockPart()}
                                   <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
                                   <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
 
                               </div>
                            <div>
                         `
-                        wrapper.innerHTML += item}
-
-                    else if(
-                         i['image'] != null && i['in_stock'] === false
-
-
-                    ) {
-
-                         var item = `
-
-
-                           <div class="col-lg-4">
-                              <img class="i" alt='1' src="${i['image']}">
-
-                              <div class="box-element product">
-
-                                  <h6><strong>${ i.name }</strong></h6>
-                                  <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
-                                  <hr>
-                                  <button class="btn btn-outline-danger" style="color: #c00101">Add to Cart</button>
-                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
-                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
-
-                              </div>
-                           <div>
-                        `
-                        wrapper.innerHTML += item}
-
-
-
-
-                    else if(
-                         i['image'] === null && i['in_stock'] === true
-
-
-                    ) {
-
-                         var item = `
-
-
-                           <div class="col-lg-4">
-                              <img class="i" alt='1' src="{% static 'images/placeholder.png' %}">
-
-                              <div class="box-element product">
-
-                                  <h6><strong>${ i.name }</strong></h6>
-                                  <h6 style="color: #008000FF"'><strong>In Stock</strong></h6>
-                                  <hr>
-                                  <button data-product="${PK}" data-url="{% url 'AddToCart' %}" data-action="add" data-product-name=${i['name']} data-c ="{{ csrf_token }}" class="btn btn-outline-secondary add-btn cart-update">Add to Cart</button>
-                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
-                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
-
-                              </div>
-                           <div>
-                        `
-                        wrapper.innerHTML += item}
-
-                    else{
-
-                         var item = `
-
-
-                           <div class="col-lg-4">
-                              <img class="i" alt='1' src="{% static 'images/placeholder.png' %}">
-
-                              <div class="box-element product">
-
-                                  <h6><strong>${ i.name }</strong></h6>
-                                  <h6 style='color:#C00101FF'><strong>Out Of Stock</strong></h6>
-                                  <hr>
-                                  <button class="btn btn-outline-danger" style="color: #c00101">Add to Cart</button>
-                                  <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
-                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
-
-                              </div>
-                           <div>
-                        `
-                        wrapper.innerHTML += item}
-
+                        wrapper.innerHTML += item
 
                     }
                 }
             )
         }
+
         </script>
 
 <script src="{% static 'js/cart.js' %}"></script>
