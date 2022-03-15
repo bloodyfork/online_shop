@@ -19,8 +19,15 @@ class Register(generic.FormView):
         if form.is_valid():
             form.save()
             phone = form.cleaned_data.get('phone')
+
+            username = request.POST.get('phone')
+            password = request.POST.get('password1')
+            user = authenticate(request, phone=username, password=password)
+            if user is not None:
+                Customer.objects.get_or_create(user=user)
+                login(request, user)
             messages.success(request, "Account has been created with phone number " + phone)
-            return redirect(to='login')
+            return redirect(to='store')
 
         else:
             e = form.errors
@@ -37,14 +44,14 @@ class Login(LoginView):
 
         username = request.POST.get('phone')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, phone=username, password=password)
         if user is not None:
             Customer.objects.get_or_create(user=user)
             login(request, user)
             return redirect(to='home')
 
         else:
-            messages.info(request, "incorrect Password or Username")
+            messages.info(request, "incorrect Password or Phone number")
             return render(request, 'Customer/login.html')
 
 
@@ -61,5 +68,3 @@ class ViewProfile(ListView, LoginRequiredMixin):
     def get_queryset(self):
         query = Address.objects.filter(customer__user=self.request.user)
         return query
-
-

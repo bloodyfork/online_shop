@@ -32,7 +32,7 @@ class AddToCart(generics.CreateAPIView):
             if product.name in item_list:
 
                 m = messages.warning(request, 'Product already exists in your cart!')
-                return HttpResponse(m)
+                return HttpResponse('m')
 
             else:
                 messages.info(request, 'Item added to your cart!')

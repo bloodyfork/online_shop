@@ -8,9 +8,31 @@
             <h6 style="color: snow; ">{{ message }}</h6>
         </div>
     {% endfor %}
-    <div class="row">
 
-    <div class="box-element product col-lg-8">
+    <div class="row">
+        <div class="box-element product col-lg-12">
+
+        <div class="box-element">
+
+                 <a href="{% url 'logout' %} " class="btn btn-danger" style="margin-right: 10px; color: whitesmoke;  float: right">Logout</a>
+
+            <br>
+            <br>
+            <h4 style=""><b>fullname:</b>  {{ user.first_name }}</h4>
+            <br>
+            <h4 style=""><b>Phone Number:</b>  {{user.phone}}</h4>
+
+            <br>
+
+            <button class="  centered btn btn-dark col-lg-12">edit profile</button>
+
+
+        </div>
+    </div>
+    </div>
+    <div class="row" style="height: 100%;">
+
+    <div class="box-element product col-lg-12 mt-3">
         <div class="col-lg-12 product centered">
             <h1><strong>Recent Orders</strong></h1>
         </div>
@@ -20,25 +42,25 @@
         <h6 style=""> .................................................................................................................</h6>
     </div>
 
-    <div class="box-element product col-lg-4">
-
-        <div class="box-element">
-
-                 <a href="{% url 'logout' %} " class="btn btn-danger" style="margin-right: 10px; color: whitesmoke;  float: right">Logout</a>
-
-            <br>
-            <br>
-            <h4 style=""><b>Username:</b>  {{user.username}}</h4>
-            <br>
-            <h4 style=""><b>Phone Number:</b>  {{user.phone}}</h4>
-
-            <br>
-
-            <button class="centered btn btn-outline-dark col-lg-10">change Password</button>
-
-
-        </div>
-    </div>
+{#    <div class="box-element product col-lg-4">#}
+{##}
+{#        <div class="box-element">#}
+{##}
+{#                 <a href="{% url 'logout' %} " class="btn btn-danger" style="margin-right: 10px; color: whitesmoke;  float: right">Logout</a>#}
+{##}
+{#            <br>#}
+{#            <br>#}
+{#            <h4 style=""><b>Username:</b>  {{user.username}}</h4>#}
+{#            <br>#}
+{#            <h4 style=""><b>Phone Number:</b>  {{user.phone}}</h4>#}
+{##}
+{#            <br>#}
+{##}
+{#            <button class="centered btn btn-outline-dark col-lg-10">change Password</button>#}
+{##}
+{##}
+{#        </div>#}
+{#    </div>#}
 </div>
 
 
@@ -46,7 +68,7 @@
 
 
 
-<div class="box-element mt-2 col-lg-12">
+<div class="box-element mt-3 col-lg-12">
             {% for A in addresses %}
                 <div id="address{{ A.id }}"  class="box-element mt-2 AddressBar">
                     <div class="cart-row">
