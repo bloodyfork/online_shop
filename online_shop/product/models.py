@@ -11,6 +11,7 @@ class Product(BaseModel):
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE)
     description = models.TextField(max_length=500, default="Unknown")
     image = models.ImageField(blank=True, null=True, upload_to='static/images/product',
+                              default='static/images/product/placeholder.png',
                               help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
     price = models.PositiveIntegerField(help_text="Enter price of product")
