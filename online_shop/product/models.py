@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 from core.models import BaseModel
+from customer.models import Customer
 
 
 # Create your models here.
@@ -14,7 +15,7 @@ class Product(BaseModel):
                               default='static/images/product/placeholder.png',
                               help_text="Upload photo of product here")
     in_stock = models.BooleanField(default=True)
-    price = models.PositiveIntegerField(help_text="Enter price of product")
+    price = models.PositiveIntegerField(help_text="Enter price of product", validators=[MinValueValidator(0)])
     number_in_inventory = models.PositiveSmallIntegerField(default=1, validators=[MinValueValidator(0)])
     discount = models.OneToOneField(to='Discount', on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -46,7 +47,7 @@ class Product(BaseModel):
         elif self.discount is not None:
             if self.discount.type == "percentage":
                 discount_amount = (self.price * (100 - self.discount.value)) // 100
-                print(discount_amount)
+                self.after_dis_price = discount_amount
                 if discount_amount > self.discount.max_discount:
                     raise "the discount is more than maximum amount for discount"
                 else:
@@ -96,5 +97,6 @@ class Discount(BaseModel):
 
 
 class Comment(BaseModel):
+    author = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
     context = models.CharField(max_length=120)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
