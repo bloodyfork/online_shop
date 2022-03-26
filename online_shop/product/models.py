@@ -45,11 +45,12 @@ class Product(BaseModel):
             return self.price
         elif self.discount is not None:
             if self.discount.type == "percentage":
-                discount_amount = (self.price * self.discount.value) // self.price
+                discount_amount = (self.price * (100 - self.discount.value)) // 100
+                print(discount_amount)
                 if discount_amount > self.discount.max_discount:
                     raise "the discount is more than maximum amount for discount"
                 else:
-                    res = self.price - discount_amount
+                    res = discount_amount
                     return res
 
             elif self.discount.type == "currency":

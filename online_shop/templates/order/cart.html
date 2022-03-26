@@ -61,8 +61,33 @@
             <div>
                 <h1 class="centered">Choose Address</h1>
             </div>
-            <button id="AddAddress" class="btn btn-info col-lg-2">Add New Address</button>
+            {#  ToDo change curren address onaddress change #}
+            <div>
+                <h4 class="">Current Address:</h4>
+            </div>
+
+                   <div  class="box-element mt-2 AddressBar">
+                        <div class="cart-row">
+
+                            <div style="flex:1"><strong>Province</strong></div>
+                            <div style="flex:1"><strong>City</strong></div>
+                            <div style="flex:1"><strong>Zip-Code</strong></div>
+                            <div style="flex:1"><strong>Exact Address</strong></div>
+
+                        </div>
+
+                        <div class="cart-row">
+
+                            <div id="current_province" data-inside="{{ cart.address.province }}" class="showing-province" style="flex:1">{{ cart.address.province }}</div>
+                            <div id="current_city" data-inside="{{ cart.address.city }}" class="mr-3 showing-city ml-5" style="flex:1">{{cart.address.city}}</div>
+                            <div id="current_zip" data-inside="{{ cart.address.postal_code }}" class="mr-4 showing-zip ml-5" style="flex:1">{{ cart.address.postal_code }}</div>
+                            <div id="current_exact" data-inside="{{ cart.address.exact_address }}" class="mr-4 showing-zip ml-5" style="flex:1">{{ cart.address.exact_address }}</div>
+                        </div>
+                   </div>
+
+            <a id="AddAddress" class="btn btn-info col-lg-2 mt-3" href="{% url 'profile' %}">Add New Address</a>
             <div id="modal-message"></div>
+
             {% for A in addresses  %}
 
                 <button class="btn" onclick="updateCartAddress({{ cart.id }}, {{ A.id }})">
@@ -103,7 +128,15 @@
                         <th><h5>Total price: <strong id="total-price">${{ cart.calculate_total_price }}</strong></h5></th>
                         <th><h5>Final price: <strong id="final-price">${{ cart.calculate_final_price }}</strong></h5></th>
                         <th>
-                            <a style="float: right; margin: 5px" class="btn btn-success" id="checkoutModalbtn">Checkout</a>
+                            {% if request.user.is_authenticated %}
+                                 <a style="float: right; margin: 5px" class="btn btn-success" id="checkoutModalbtn">Checkout</a>
+
+                        {#  ToDo add a situation without any product #}
+
+                            {% else %}
+                                 <h6 style="color: #c00101; float: right">For Checkout you should login first!</h6>
+                            {% endif %}
+
                         </th>
                     </tr>
                 </table>
@@ -233,6 +266,18 @@ function updateCartAddress(cart_value, address_value){
 
                         x = $('.modal_message')
                         x.fadeOut(2000)
+
+                        let province = $('#current_province')
+                        let data_provice = province.attr('data-inside')
+                        let city = $('#current_city')
+                        let data_city = city.attr('data-inside')
+                        let zip = $('#current_zip')
+                        let data_Zip = zip.attr('data-inside')
+                        let exact = $('#current_exact')
+                        let data_exact = exact.attr('data-inside')
+                        console.log(data_Zip)
+                        console.log(data_city)
+
 
 
 

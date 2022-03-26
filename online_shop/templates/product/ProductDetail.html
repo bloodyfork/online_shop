@@ -34,7 +34,26 @@
             <br>
             <h4 style=""><b>Brand:</b>   {{ product.brand }}</h4>
             <h4 style="display: inline-block; float:right;">   <img class="brand-logo" alt='Logo' src="{{product.brand.logo.url}}"></h4>
+
+        {% if product.discount == None %}
             <h4 style=""><b>Price:</b>   ${{ product.price }}</h4>
+
+        {% elif product.discount.type == "percentage" %}
+
+             <h4 style="color: #C00101FF">% {{ product.discount.value }} Off</h4>
+            <h4 style=""><b>Price:</b> ${{ product.after_discount_price }}  <s class="mr-3" style="color: #C00101FF; float: right">${{ product.price }}</s></h4>
+
+
+        {% elif product.discount.type == 'currency' %}
+              <h4 style="color: #C00101FF">-{{ product.discount.value }} </h4>
+            <h4 style=""><b>Price:</b> ${{ product.after_discount_price }}  <s class="mr-4" style="color: #C00101FF; float: right">${{ product.price }}</s></h4>
+
+
+        {% else %}
+             <h4 style=""><b>Price:</b>mmmmmm</h4>
+        {% endif %}
+
+
             {% if product.in_stock == True %}
                 <h4 style="color: green">In stock</h4>
             {% else %}

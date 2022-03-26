@@ -41,7 +41,19 @@
 
                             {% endif %}
                             <a class="btn btn-outline-success add-btn" href="{% url 'ProductDetail' pk=product.pk %}">View</a>
-                            <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
+                            {% if product.discount == None %}
+                                <h4 style="display: inline-block; float:right;">${{ product.price }}</h4>
+
+                            {% elif product.discount.type == 'percentage' %}
+                                <h4  style="display: inline-block; float:right;"><b>${{ product.after_discount_price }}</b> <s style="color:#C00101FF;">${{ product.price }}</s></h4>
+
+                            {% elif product.discount.type == 'currency' %}
+                                <h4 style="display: inline-block; float:right;"><b>${{ product.after_discount_price }}</b>  <s style="color:#C00101FF;">${{ product.price }}</s></h4>
+
+                            {%  else %}
+
+                            {% endif %}
+
                         </div>
                     </div>
 
