@@ -98,5 +98,13 @@ class Discount(BaseModel):
 
 class Comment(BaseModel):
     author = models.ForeignKey(to=Customer, on_delete=models.CASCADE)
-    context = models.CharField(max_length=120)
+    context = models.CharField(max_length=180)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+
+        if self.author.user.first_name == '':
+            return ' from Unknown'
+
+        else:
+            return f'from {self.author.user.first_name}'

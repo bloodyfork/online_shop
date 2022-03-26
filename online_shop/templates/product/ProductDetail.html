@@ -69,7 +69,14 @@
     <div class="col-lg-12">
         <div class="box-element">
             <h3>Reviews:</h3>
-            <div class="box-element">vdsssssssssss</div>
+            {% for comment in product.comment_set.all %}
+                <div class="box-element mt-3"><h6>{{ comment }}</h6><br>
+                                              <p>{{ comment.context }}</p>
+                </div>
+
+
+            {% endfor %}
+
         </div>
     </div>
 </div>
