@@ -57,6 +57,28 @@
                             }
                         }
 
+
+                         function PricePart () {
+
+                            if (i['discount'] === null) {
+
+                                let p = `
+                                <h4 style="display: inline-block; float:right;">$${ i['price'] }</h4>
+
+                                `
+                                return p
+
+                            } else if (i['discount'] !== null) {
+
+                                let p =
+                                    `
+                                    <h4 style="display: inline-block; float:right;"><b>${i['price']}</b><s style="color:#C00101FF">$${ i['price'] }</s></h4>
+                                    `
+                                {# ToDO add price after discout #}
+                                return p
+                            }
+                        }
+
                         let item = `
 
                            <div class="col-lg-4">
@@ -67,7 +89,8 @@
                                   <h6><strong>${ i.name }</strong></h6>
                                   ${StockPart()}
                                   <a class="btn btn-outline-success add-btn" href="http://127.0.0.1:8000/product/ProductDetail/${PK}">View</a>
-                                  <h4 style="display: inline-block; float:right;">$${ i.price }</h4>
+                                  {#<h4 style="display: inline-block; float:right;">$${ i.price }</h4>#}
+                                  ${PricePart()}
 
                               </div>
                            <div>
