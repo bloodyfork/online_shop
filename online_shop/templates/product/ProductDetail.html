@@ -72,10 +72,25 @@
             {% for comment in product.comment_set.all %}
                 <div class="box-element mt-3"><h6>{{ comment }}</h6><br>
                                               <p>{{ comment.context }}</p>
+
+                <p>{{ comment.create_timestamp }}</p>
                 </div>
 
 
             {% endfor %}
+        {% if request.user.is_authenticated %}
+            <form class="mt-2">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Comment</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Comment">
+                     <small id="emailHelp" class="form-text text-muted">We won't share your phone number
+                        else.</small>
+                </div>
+
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+
+        {% endif %}
 
         </div>
     </div>
