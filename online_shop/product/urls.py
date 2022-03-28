@@ -1,6 +1,6 @@
 from django.urls import path
 
-from product.API import ProductListAPI
+from product.API import ProductListAPI, CreateCommentAPI
 from product.views import StoreListView, CategoryListView, CategoryBasedProductListView, ProductDetailView, FrontCategories
 
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     # APIS
     # APIS
 
-    path("ProductListAPI/", ProductListAPI.as_view(), name="ProductListAPI")
+    path("ProductListAPI/", ProductListAPI.as_view(), name="ProductListAPI"),
+    path("CommentCreateAPI/", CreateCommentAPI.as_view(), name="CreateCommentAPI")
 ]

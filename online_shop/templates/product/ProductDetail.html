@@ -8,6 +8,9 @@
          </div>
      {% endfor %}
 
+
+
+
 <div class="row">
 
     <div class="box-element product col-lg-8">
@@ -87,7 +90,7 @@
                      <small id="emailHelp" class="form-text text-muted">We won't share your phone number</small>
                 </div>
 
-                <button  type="button" id="commentBtn" onclick="getComment()" class="btn btn-dark col-lg-2"> Submit</button>
+                <button  type="submit" id="commentBtn" onclick="getComment({{ product.id }})" class="btn btn-dark col-lg-2"> Submit</button>
             </form>
 
         {% endif %}
@@ -101,29 +104,31 @@
 <script src="{% static 'js/cart.js' %}"></script>
 
 <script>
-function getComment () {
-    let comment = $('#commentCon')
-    console.log(comment.val())
+function getComment (product) {
+    let comment = $('#commentCon').val()
+    console.log(comment)
      $.ajax({
-            url: "{% url 'IncAndDec'  %}",
-            method: 'PATCH',
+            url: "{% url 'CreateCommentAPI' %}",
+            method: 'POST',
             headers: {
                 'X-CSRFTOKEN': '{{ csrf_token }}'
+
             },
             data: {
-                'how_many' : Number($(`#how_many${value}`)),
-                'action': action,
-                'item_id' : value
+                'context': comment,
+                'product': product
             },
-            success: function () {
 
-            {#  TODO STOP THE RELOAD  #}
-
-            },
         })
 }
 
 </script>
+
+<script>
+        x = $('#message-cat')
+        x.fadeOut(2800)
+    </script>
+
 
 
 {% endblock %}

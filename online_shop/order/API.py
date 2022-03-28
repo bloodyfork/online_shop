@@ -6,7 +6,7 @@ from product.models import Product
 from customer.models import Customer
 from order.models import Cart
 from rest_framework.response import Response
-from django.shortcuts import HttpResponse, redirect
+from django.shortcuts import HttpResponse
 
 
 # API for OrderItems Create Update Delete

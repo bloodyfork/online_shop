@@ -1,5 +1,5 @@
 from django.views import generic
-from product.models import Product, Category
+from product.models import Product, Category, Comment
 
 
 class StoreListView(generic.ListView):
@@ -41,3 +41,5 @@ class ProductDetailView(generic.DetailView):
     template_name = "product/ProductDetail.html"
     context_object_name = "product"
     pk_url_kwarg = "pk"
+
+
