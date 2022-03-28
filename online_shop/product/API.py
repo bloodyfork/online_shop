@@ -13,8 +13,9 @@ class ProductListAPI(generics.ListAPIView, mixins.ListModelMixin):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    def post(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class CreateCommentAPI(generics.CreateAPIView):
+    serializer_class = ...

@@ -48,9 +48,8 @@
               <h4 style="color: #C00101FF">-{{ product.discount.value }} </h4>
             <h4 style=""><b>Price:</b> ${{ product.after_discount_price }}  <s class="mr-4" style="color: #C00101FF; float: right">${{ product.price }}</s></h4>
 
-
         {% else %}
-             <h4 style=""><b>Price:</b>mmmmmm</h4>
+             <h4 style=""><b>Price:</b>something went wrong</h4>
         {% endif %}
 
 
@@ -79,15 +78,16 @@
 
             {% endfor %}
         {% if request.user.is_authenticated %}
+
+
             <form class="mt-2">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Comment</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Comment">
-                     <small id="emailHelp" class="form-text text-muted">We won't share your phone number
-                        else.</small>
+                    <label for="commentCon">Comment</label>
+                    <input type="text" class="form-control" id="commentCon" placeholder="Comment">
+                     <small id="emailHelp" class="form-text text-muted">We won't share your phone number</small>
                 </div>
 
-                <button type="submit" class="btn btn-dark">Submit</button>
+                <button  type="button" id="commentBtn" onclick="getComment()" class="btn btn-dark col-lg-2"> Submit</button>
             </form>
 
         {% endif %}
@@ -97,12 +97,34 @@
 </div>
 
 
+<script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'js/cart.js' %}"></script>
 
-    <script>
-        x = $('#message-cat')
-        x.fadeOut(2800)
-    </script>
+<script>
+function getComment () {
+    let comment = $('#commentCon')
+    console.log(comment.val())
+     $.ajax({
+            url: "{% url 'IncAndDec'  %}",
+            method: 'PATCH',
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            data: {
+                'how_many' : Number($(`#how_many${value}`)),
+                'action': action,
+                'item_id' : value
+            },
+            success: function () {
+
+            {#  TODO STOP THE RELOAD  #}
+
+            },
+        })
+}
+
+</script>
+
 
 {% endblock %}
 
