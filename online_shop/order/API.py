@@ -107,6 +107,7 @@ class CheckoutAPIView(generics.UpdateAPIView):
 
         if the_cart.address is not None:
             the_cart.is_paid = True
+            the_cart.is_deleted = True
             the_cart.save()
             for o in order_items:
                 productz = o.product

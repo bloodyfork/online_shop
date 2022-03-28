@@ -31,7 +31,7 @@
             <h1 class="centered">Order Summary</h1>
         </div>
 
-        <h3>You will pay: ${{ cart.calculate_final_price }}</h3>
+            <div ><h4>You will pay:</h4> <h4 style="color: #2E8B57; display: inline-block">${{ cart.calculate_final_price }}</h4></div>
 
             {% for item in items %}
                 <div class="box-element mt-3">
