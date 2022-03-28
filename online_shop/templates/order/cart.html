@@ -31,6 +31,8 @@
             <h1 class="centered">Order Summary</h1>
         </div>
 
+        <h3>You will pay: ${{ cart.calculate_final_price }}</h3>
+
             {% for item in items %}
                 <div class="box-element mt-3">
                     <div class="cart-row">
@@ -51,7 +53,13 @@
                             <p class="count-of-item" id="how_many{{ item.id }}">{{ item.how_many }}</p>
 
                         </div>
-                        <div style="flex:1">${{ item.sum_of_prices_after_discount }}</div>
+
+                        {% if item.product.discount == None %}
+                            <div style="flex:1">${{ item.sum_of_prices_after_discount }}</div>
+
+                        {% else %}
+                            <div  style="flex:1; color:#c00101"><b>${{ item.sum_of_prices_after_discount }}</b></div>
+                        {% endif %}
                     </div>
 
                 </div>
@@ -178,7 +186,12 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div style="flex:1">${{ item.sum_of_prices_after_discount }}</div>
+                        {% if item.product.discount == None %}
+                            <div style="flex:1"><b>${{ item.sum_of_prices_after_discount }}</b></div>
+                        {% else %}
+                            <div style="flex:1; color:#c00101"><b>${{ item.sum_of_prices_after_discount }}</b></div>
+
+                        {% endif %}
                     </div>
 
                 </div>

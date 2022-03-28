@@ -40,7 +40,7 @@ class Cart(BaseModel):
             return self.final_price
 
         else:
-
+            self.final_price = 0
             for order in all_order_items:
                 discounted_prices = order.sum_of_prices_after_discount()
                 self.final_price += discounted_prices
@@ -68,21 +68,6 @@ class OrderItem(BaseModel):
     def sum_of_prices_after_discount(self):
         res = self.product.after_discount_price() * self.how_many
         return res
-
-    def increase_how_many(self):   # UNUSED ##################
-        product_quantiy = self.product.number_in_inventory
-        if product_quantiy >= self.how_many + 1:
-            self.how_many += 1
-            return True
-
-        else:
-            return False
-
-    def decrease_how_many(self):   # UNUSED ##################
-        if self.how_many - 1 == 0:
-            self.delete()
-        else:
-            self.how_many -= 1
 
 
 class OffCode(BaseModel):
