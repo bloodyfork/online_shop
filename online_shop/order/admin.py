@@ -4,7 +4,7 @@ from .models import *
 
 
 class CartShow(admin.ModelAdmin):
-    list_display = ['customer', 'total_price', 'final_price', 'is_paid']
+    list_display = ['customer', 'total_price', 'final_price', 'is_paid', 'is_deleted']
 
 
 class OrderItemShow(admin.ModelAdmin):

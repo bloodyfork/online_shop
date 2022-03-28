@@ -39,28 +39,8 @@
         <br>
         <br>
         <br>
-        <h6 style=""> .................................................................................................................</h6>
+        <div id="recent-orders" data-url="{% url 'RecentOrders' %}"></div>
     </div>
-
-{#    <div class="box-element product col-lg-4">#}
-{##}
-{#        <div class="box-element">#}
-{##}
-{#                 <a href="{% url 'logout' %} " class="btn btn-danger" style="margin-right: 10px; color: whitesmoke;  float: right">Logout</a>#}
-{##}
-{#            <br>#}
-{#            <br>#}
-{#            <h4 style=""><b>Username:</b>  {{user.username}}</h4>#}
-{#            <br>#}
-{#            <h4 style=""><b>Phone Number:</b>  {{user.phone}}</h4>#}
-{##}
-{#            <br>#}
-{##}
-{#            <button class="centered btn btn-outline-dark col-lg-10">change Password</button>#}
-{##}
-{##}
-{#        </div>#}
-{#    </div>#}
 </div>
 
 
@@ -315,5 +295,38 @@
 <script>
         x = $('#ViewProfile-message')
         x.fadeOut(3000)
+    </script>
+
+
+  <script type="text/javascript">
+        isPaid_list()
+
+
+        function isPaid_list(){
+            let wrapper = document.getElementById('recent-orders')
+            let  url = document.getElementById('recent-orders').getAttribute('data-url')
+            fetch(url)
+            .then((resp) => resp.json())
+
+            .then(
+
+                function (order){
+
+                    for (let i of order){
+
+                        let PK = i.id
+
+
+
+                        let item = `
+
+
+                        `
+                        wrapper.innerHTML += item
+
+                    }
+                }
+            )
+        }
     </script>
 {% endblock %}

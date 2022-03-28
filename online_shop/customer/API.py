@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.http import HttpResponse
 
-from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView
+from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from customer.models import Address
-from customer.serializers import AddressSerializer
+from customer.serializers import AddressSerializer, CartSerializer
+from order.models import Cart
 
 
 class DeleteAPIAddress(DestroyAPIView):
@@ -19,7 +20,7 @@ class UpdateAPIAddress(UpdateAPIView):
 
     def partial_update(self, request, *args, **kwargs):
         data = request.data
-        if data['exact_address'] is not '' and\
+        if data['exact_address'] is not '' and \
                 data['city'] is not '' and \
                 data['province'] is not '' and \
                 data['zip'] is not '':
@@ -55,5 +56,15 @@ class CreateAPIAddress(CreateAPIView):
                                        customer=customer)
         query.save()
         # m = messages.info(request, 'Address has been successfully created')
-        # ToDo make the message apear without reload
+        # ToDo make the message appear without reload
         return HttpResponse('m')
+
+
+class RecentOrdersAPI(ListAPIView):
+    serializer_class = CartSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        query = Cart.objects.filter(customer=user.customer, is_paid=True)
+        return query
+

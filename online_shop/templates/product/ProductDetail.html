@@ -106,7 +106,6 @@
 <script>
 function getComment (product) {
     let comment = $('#commentCon').val()
-    console.log(comment)
      $.ajax({
             url: "{% url 'CreateCommentAPI' %}",
             method: 'POST',

@@ -31,7 +31,7 @@ class AddToCart(generics.CreateAPIView):
 
             if product.name in item_list:
 
-                m = messages.warning(request, 'Product already exists in your cart!')
+                messages.warning(request, 'Product already exists in your cart!')
                 return HttpResponse('m')
 
             else:
@@ -107,7 +107,6 @@ class CheckoutAPIView(generics.UpdateAPIView):
 
         if the_cart.address is not None:
             the_cart.is_paid = True
-            the_cart.is_deleted = True
             the_cart.save()
             for o in order_items:
                 productz = o.product
@@ -125,4 +124,3 @@ class CheckoutAPIView(generics.UpdateAPIView):
             messages.info(request, 'You should choose an address')
             serializer = CartSerializer(the_cart)
             return Response(serializer.data)
-

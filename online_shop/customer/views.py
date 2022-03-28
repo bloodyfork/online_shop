@@ -4,6 +4,8 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.views import generic
+
+from order.models import Cart
 from .models import Customer, Address
 from .forms import CreateUserForm
 from django.views.generic.list import ListView
@@ -65,6 +67,3 @@ class ViewProfile(ListView, LoginRequiredMixin):
     template_name = 'Customer/view_profile.html'
     context_object_name = 'addresses'
 
-    def get_queryset(self):
-        query = Address.objects.filter(customer__user=self.request.user)
-        return query

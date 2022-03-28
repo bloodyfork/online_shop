@@ -1,5 +1,5 @@
 from django.urls import path
-from customer.API import DeleteAPIAddress, UpdateAPIAddress, CreateAPIAddress
+from customer.API import DeleteAPIAddress, UpdateAPIAddress, CreateAPIAddress, RecentOrdersAPI
 from customer.views import Login, Register, logout_user, ViewProfile
 
 urlpatterns = [
@@ -13,5 +13,6 @@ urlpatterns = [
     path('DeleteAddress/<int:pk>', DeleteAPIAddress.as_view(), name='DeleteAddress'),
     path('UpdateAddress/<int:pk>', UpdateAPIAddress.as_view(), name='UpdateAddress'),
     path('CreateAddress/', CreateAPIAddress.as_view(), name='CreateAddress'),
+    path('RecentOrders/', RecentOrdersAPI.as_view(), name='RecentOrders'),
 
 ]
