@@ -68,3 +68,7 @@ class RecentOrdersAPI(ListAPIView):
         query = Cart.objects.filter(customer=user.customer, is_paid=True)
         return query
 
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+

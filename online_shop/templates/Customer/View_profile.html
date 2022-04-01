@@ -297,36 +297,4 @@
         x.fadeOut(3000)
     </script>
 
-
-  <script type="text/javascript">
-        isPaid_list()
-
-
-        function isPaid_list(){
-            let wrapper = document.getElementById('recent-orders')
-            let  url = document.getElementById('recent-orders').getAttribute('data-url')
-            fetch(url)
-            .then((resp) => resp.json())
-
-            .then(
-
-                function (order){
-
-                    for (let i of order){
-
-                        let PK = i.id
-
-
-
-                        let item = `
-
-
-                        `
-                        wrapper.innerHTML += item
-
-                    }
-                }
-            )
-        }
-    </script>
 {% endblock %}
