@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from customer.models import Address
-from customer.serializers import AddressSerializer, CartSerializer
-from order.models import Cart
+from customer.serializers import AddressSerializer
+from order.models import OrderItem
+from order.serializers import OrderItemSerializer
 
 
 class DeleteAPIAddress(DestroyAPIView):
@@ -20,10 +21,10 @@ class UpdateAPIAddress(UpdateAPIView):
 
     def partial_update(self, request, *args, **kwargs):
         data = request.data
-        if data['exact_address'] is not '' and \
-                data['city'] is not '' and \
-                data['province'] is not '' and \
-                data['zip'] is not '':
+        if data['exact_address'] != '' and \
+                data['city'] != '' and \
+                data['province'] != '' and \
+                data['zip'] != '':
 
             customer = request.user.customer
             data = request.data
@@ -61,14 +62,13 @@ class CreateAPIAddress(CreateAPIView):
 
 
 class RecentOrdersAPI(ListAPIView):
-    serializer_class = CartSerializer
+    serializer_class = OrderItemSerializer
 
     def get_queryset(self):
         user = self.request.user
-        query = Cart.objects.filter(customer=user.customer, is_paid=True)
+        query = OrderItem.objects.filter(cart__customer=user.customer, cart__is_paid=True)
+        print(query)
         return query
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-
-

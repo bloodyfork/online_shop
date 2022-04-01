@@ -297,4 +297,32 @@
         x.fadeOut(3000)
     </script>
 
+
+
+ <script type="text/javascript">
+        RecentOrderList()
+
+
+        function RecentOrderList(){
+            let wrapper = document.getElementById('recent-orders')
+            let  url = document.getElementById('recent-orders').getAttribute('data-url')
+            fetch(url)
+            .then((resp) => resp.json())
+
+            .then(
+
+                function (order){
+
+                    for (let i of order){
+
+                        let item = `
+                        <div>ddddddddd</div>
+                        `
+                        wrapper.innerHTML += item
+
+                    }
+                }
+            )
+        }
+    </script>
 {% endblock %}
