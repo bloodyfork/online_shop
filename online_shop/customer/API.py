@@ -3,8 +3,10 @@ from django.http import HttpResponse
 
 from rest_framework.generics import DestroyAPIView, UpdateAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
+
+from core.models import User
 from customer.models import Address
-from customer.serializers import AddressSerializer
+from customer.serializers import AddressSerializer, ProfileSerializer
 from order.models import OrderItem
 from order.serializers import OrderItemSerializer
 
@@ -72,3 +74,16 @@ class RecentOrdersAPI(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class UpdateProfileAPI(UpdateAPIView):
+    serializer_class = ProfileSerializer
+    queryset = User
+    lookup_field = 'pk'
+
+    def partial_update(self, request, *args, **kwargs):
+        data = request.data
+        fullname = data['fullname']
+        email = data['email']
+        phone = data['phone']
+

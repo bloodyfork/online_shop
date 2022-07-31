@@ -24,7 +24,7 @@
 
             <br>
 
-            <button class="  centered btn btn-dark col-lg-12">edit profile</button>
+            <a class="centered btn btn-dark col-lg-12" href="{% url 'EditProfile' %}">edit profile</a>
 
 
         </div>
@@ -316,7 +316,33 @@
                     for (let i of order){
 
                         let item = `
-                        <div>ddddddddd</div>
+
+                             <div class="box-element mt-3">
+                    <div class="cart-row">
+                        <div style="flex:2"></div>
+                        <div style="flex:2"><strong>Item</strong></div>
+                        <div style="flex:1"><strong>Price</strong></div>
+                        <div style="flex:1"><strong>Quantity</strong></div>
+                        <div style="flex:1"><strong>Total</strong></div>
+                    </div>
+
+                    <div class="cart-row">
+                        <div style="flex:2">
+                            <image src="" class="row-image" alt='img'></image>
+                        </div>
+                        <div style="flex:2">name</div>
+                        <div style="flex:1">price</div>
+                        <div style="flex:1">
+                            <p class="count-of-item" >how_many</p>
+
+                        </div>
+
+                            <div style="flex:1"><b>$price</b></div>
+
+
+
+                    </div>
+
                         `
                         wrapper.innerHTML += item
 

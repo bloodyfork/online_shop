@@ -67,3 +67,7 @@ class ViewProfile(ListView, LoginRequiredMixin):
     template_name = 'Customer/view_profile.html'
     context_object_name = 'addresses'
 
+
+class EditProfile(generic.TemplateView):
+    template_name = 'Customer/edit_profile.html'
+

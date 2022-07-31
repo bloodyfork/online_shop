@@ -1,0 +1,80 @@
+{% extends 'core/main.html' %}
+{% load static %}
+
+{% block content %}
+    <form>
+        <div class="form-group">
+            <label for="fullname">fullname</label>
+            <input value="{{ request.user.first_name }}" type="text" class="form-control" id="fullname"
+                   placeholder="Fullname">
+        </div>
+
+         <div class="form-group">
+            <label for="phone" >phone</label>
+            <input value="{{ request.user.phone}}" type="number" class="form-control" id="phone"
+                   placeholder="phone">
+            <small class="form-text text-muted">We'll never share your phone with anyone else.</small>
+        </div>
+
+{#        <div class="form-group">#}
+{#            <label for="exampleInputPassword1">Password</label>#}
+{#            <input value="{{ request.user.password }}" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">#}
+{#            <button class="btn" onclick="passwordToggle()"><i style="display: inline-block" class="fa fa-eye" aria-hidden="true"></i></button>#}
+{#        </div>#}
+
+        <div class="form-group">
+            <label  for="email1">Email</label>
+            <input value="" type="email" class="form-control" id="email1" placeholder="email" aria-describedby="emailHelp">
+        </div>
+
+        <button type="submit" class="btn btn-success" onclick="UpdateProfile({{ request.user.pk }})">Submit</button>
+    </form>
+
+
+    <script>
+
+        function UpdateProfile(value) {
+            let fullname = $(`#fullname`).val()
+            let phone = $(`#phone`).val()
+            let email = $(`#email1`).val()
+
+
+            $.ajax({
+                url: "{% url 'UpdateProfile' pk=0 %}".replace(/0/, value),
+                method: 'PATCH',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                data: {
+                    'fullname': fullname,
+                    'phone': phone,
+                    'email': email,
+
+
+                },
+
+                success: function () {
+                    window.location.reload()
+                    {#  todo STOP THE RELOAD  #}
+
+
+                },
+            })
+
+        }
+    </script>
+
+    <script>
+
+        function passwordToggle() {
+            var x = document.getElementById("exampleInputPassword1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+    </script>
+
+{% endblock %}
